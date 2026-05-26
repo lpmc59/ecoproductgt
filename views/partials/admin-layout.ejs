@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - EcoProduct</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:#f3f4f6; color:#374151; min-height:100vh; }
+
+    .admin-sidebar { position:fixed; top:0; left:0; width:250px; height:100vh; background:#064e3b; color:#fff; padding:1.5rem 0; overflow-y:auto; z-index:100; }
+    .admin-sidebar .logo { padding:0 1.5rem; margin-bottom:2rem; }
+    .admin-sidebar .logo h2 { font-size:1.25rem; display:flex; align-items:center; gap:0.5rem; }
+    .admin-sidebar .logo p { font-size:0.75rem; color:rgba(255,255,255,0.5); margin-top:0.25rem; }
+    .admin-sidebar nav { padding:0; }
+    .admin-sidebar nav a { display:flex; align-items:center; gap:0.75rem; padding:0.75rem 1.5rem; color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem; transition:all 0.2s; border-left:3px solid transparent; }
+    .admin-sidebar nav a:hover, .admin-sidebar nav a.active { background:rgba(255,255,255,0.1); color:#fff; border-left-color:#34d399; }
+    .admin-sidebar nav a i { width:20px; text-align:center; }
+    .sidebar-divider { height:1px; background:rgba(255,255,255,0.1); margin:1rem 0; }
+    .sidebar-section { padding:0 1.5rem; margin-bottom:0.5rem; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.4); }
+
+    .admin-main { margin-left:250px; min-height:100vh; }
+    .admin-topbar { background:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e5e7eb; position:sticky; top:0; z-index:50; }
+    .admin-topbar h1 { font-size:1.25rem; color:#111827; }
+    .admin-topbar .user-info { display:flex; align-items:center; gap:1rem; }
+    .admin-topbar .user-badge { background:#ecfdf5; color:#059669; padding:0.35rem 0.85rem; border-radius:20px; font-size:0.8rem; font-weight:600; }
+    .admin-topbar a { color:#6b7280; text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
+    .admin-topbar a:hover { color:#dc2626; }
+
+    .admin-content { padding:2rem; }
+
+    /* CARDS & COMPONENTS */
+    .admin-card { background:#fff; border-radius:14px; border:1px solid #e5e7eb; padding:1.5rem; margin-bottom:1.5rem; }
+    .admin-card h3 { font-size:1.1rem; color:#111827; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+    .admin-card h3 i { color:#059669; }
+
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:2rem; }
+    .stat-card { background:#fff; border-radius:14px; padding:1.5rem; border:1px solid #e5e7eb; }
+    .stat-card .stat-icon { width:45px; height:45px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; margin-bottom:0.75rem; }
+    .stat-card .stat-value { font-size:1.75rem; font-weight:800; color:#111827; }
+    .stat-card .stat-label { font-size:0.82rem; color:#6b7280; }
+
+    .form-group { margin-bottom:1.25rem; }
+    .form-group label { display:block; font-size:0.85rem; font-weight:600; color:#374151; margin-bottom:0.4rem; }
+    .form-group input, .form-group textarea, .form-group select { width:100%; padding:0.7rem 1rem; border:1px solid #d1d5db; border-radius:10px; font-size:0.9rem; font-family:inherit; transition:border 0.2s; background:#fff; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:#059669; box-shadow:0 0 0 3px rgba(5,150,105,0.1); }
+    .form-group textarea { min-height:100px; resize:vertical; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+
+    .btn-admin { display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.25rem; border-radius:10px; font-size:0.85rem; font-weight:600; cursor:pointer; border:none; font-family:inherit; transition:all 0.2s; text-decoration:none; }
+    .btn-save { background:#059669; color:#fff; }
+    .btn-save:hover { background:#047857; }
+    .btn-danger { background:#dc2626; color:#fff; }
+    .btn-danger:hover { background:#b91c1c; }
+    .btn-secondary { background:#f3f4f6; color:#374151; border:1px solid #d1d5db; }
+    .btn-secondary:hover { background:#e5e7eb; }
+    .btn-info { background:#2563eb; color:#fff; }
+    .btn-info:hover { background:#1d4ed8; }
+
+    .alert { padding:0.85rem 1rem; border-radius:10px; margin-bottom:1.25rem; font-size:0.85rem; display:flex; align-items:center; gap:0.5rem; }
+    .alert-success { background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; }
+    .alert-error { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
+
+    .admin-table { width:100%; border-collapse:collapse; }
+    .admin-table th { text-align:left; padding:0.75rem 1rem; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:#6b7280; background:#f9fafb; border-bottom:1px solid #e5e7eb; }
+    .admin-table td { padding:0.75rem 1rem; border-bottom:1px solid #f3f4f6; font-size:0.9rem; vertical-align:middle; }
+    .admin-table tr:hover td { background:#f9fafb; }
+    .admin-table img { width:50px; height:50px; object-fit:contain; border-radius:8px; background:#f3f4f6; }
+
+    .badge { display:inline-flex; padding:0.2rem 0.6rem; border-radius:20px; font-size:0.75rem; font-weight:600; }
+    .badge-admin { background:#fef3c7; color:#92400e; }
+    .badge-editor { background:#dbeafe; color:#1e40af; }
+
+    .img-preview { width:120px; height:120px; border-radius:12px; object-fit:contain; background:#f3f4f6; border:1px solid #e5e7eb; }
+
+    @media(max-width:768px) {
+      .admin-sidebar { width:60px; }
+      .admin-sidebar .logo h2 span, .admin-sidebar .logo p, .admin-sidebar nav a span, .sidebar-section { display:none; }
+      .admin-sidebar nav a { justify-content:center; padding:0.75rem; }
+      .admin-main { margin-left:60px; }
+      .form-row { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<aside class="admin-sidebar">
+  <div class="logo">
+    <h2><i class="fas fa-droplet"></i> <span>EcoProduct</span></h2>
+    <p>Panel Admin</p>
+  </div>
+  <nav>
+    <a href="/admin" class="<%= typeof pageId !== 'undefined' && pageId === 'dashboard' ? 'active' : '' %>"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">Contenido</div>
+    <a href="/admin/content" class="<%= typeof pageId !== 'undefined' && pageId === 'content' ? 'active' : '' %>"><i class="fas fa-pen-to-square"></i> <span>Textos del Sitio</span></a>
+    <a href="/admin/products" class="<%= typeof pageId !== 'undefined' && pageId === 'products' ? 'active' : '' %>"><i class="fas fa-box"></i> <span>Productos</span></a>
+    <a href="/admin/categories" class="<%= typeof pageId !== 'undefined' && pageId === 'categories' ? 'active' : '' %>"><i class="fas fa-layer-group"></i> <span>Categorías</span></a>
+    <% if (user.role === 'admin') { %>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">Sistema</div>
+    <a href="/admin/users" class="<%= typeof pageId !== 'undefined' && pageId === 'users' ? 'active' : '' %>"><i class="fas fa-users"></i> <span>Usuarios</span></a>
+    <% } %>
+    <div class="sidebar-divider"></div>
+    <a href="/" target="_blank"><i class="fas fa-external-link-alt"></i> <span>Ver Sitio</span></a>
+    <a href="/admin/logout"><i class="fas fa-sign-out-alt"></i> <span>Cerrar Sesión</span></a>
+  </nav>
+</aside>

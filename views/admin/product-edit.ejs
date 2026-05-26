@@ -1,0 +1,89 @@
+<% const pageId = 'products'; %>
+<%- include('../partials/admin-layout') %>
+
+<main class="admin-main">
+  <div class="admin-topbar">
+    <h1><i class="fas fa-box"></i> <%= product.id ? 'Editar' : 'Nuevo' %> Producto</h1>
+    <div class="user-info">
+      <a href="/admin/products" class="btn-admin btn-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
+    </div>
+  </div>
+  <div class="admin-content">
+    <% if (flash && flash.message) { %>
+    <div class="alert alert-<%= flash.type === 'error' ? 'error' : 'success' %>">
+      <i class="fas fa-<%= flash.type === 'error' ? 'exclamation-circle' : 'check-circle' %>"></i> <%= flash.message %>
+    </div>
+    <% } %>
+
+    <form method="POST" action="/admin/products/<%= product.id ? 'edit/' + product.id : 'new' %>" enctype="multipart/form-data">
+      <div class="admin-card">
+        <h3><i class="fas fa-info-circle"></i> Información del Producto</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" name="name" value="<%= product.name %>" required>
+          </div>
+          <div class="form-group">
+            <label>Subtítulo</label>
+            <input type="text" name="subtitle" value="<%= product.subtitle %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea name="description" style="min-height:100px;"><%= product.description %></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Formato</label>
+            <input type="text" name="format" value="<%= product.format %>">
+          </div>
+          <div class="form-group">
+            <label>Categoría</label>
+            <select name="category">
+              <% categories.forEach(cat => { %>
+              <option value="<%= cat.id %>" <%= product.category === cat.id ? 'selected' : '' %>><%= cat.name %></option>
+              <% }); %>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Orden (número)</label>
+          <input type="number" name="order" value="<%= product.order %>" min="1">
+        </div>
+        <div class="form-group">
+          <label>Beneficios (uno por línea)</label>
+          <textarea name="benefits" style="min-height:100px;"><%= (product.benefits || []).join('\n') %></textarea>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h3><i class="fas fa-image"></i> Imágenes</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Imagen del Producto</label>
+            <% if (product.productImage) { %>
+            <div style="margin-bottom:0.5rem;"><img src="<%= product.productImage %>" class="img-preview" alt="Product"></div>
+            <% } %>
+            <input type="file" name="productImage" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label>Logo del Producto</label>
+            <% if (product.logoImage) { %>
+            <div style="margin-bottom:0.5rem;"><img src="<%= product.logoImage %>" class="img-preview" alt="Logo"></div>
+            <% } %>
+            <input type="file" name="logoImage" accept="image/*">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0.75rem;">
+        <button type="submit" class="btn-admin btn-save" style="padding:0.85rem 2.5rem;">
+          <i class="fas fa-save"></i> <%= product.id ? 'Guardar Cambios' : 'Crear Producto' %>
+        </button>
+        <a href="/admin/products" class="btn-admin btn-secondary" style="padding:0.85rem 2.5rem;">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</main>
+</body>
+</html>

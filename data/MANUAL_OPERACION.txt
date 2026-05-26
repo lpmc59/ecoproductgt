@@ -1,0 +1,29 @@
+Usuario: 	admin
+Contraseña:	admin123
+https://ecoproductgt.com/admin
+
+
+Para arrancar el proceso que debe estar corriendo en 6001
+Verificar:
+ss -tulpn | grep 6001
+curl -i http://127.0.0.1:6001
+pm2 list
+
+Para LEVANTARLO:
+cd /home/admin/projects/EcoProduct
+pm2 start server.js --name ecoproductgt
+pm2 save
+pm2 list
+curl -i http://127.0.0.1:6001
+
+Asegurar arranque automático al reiniciar servidor
+pm2 startup
+NOTA: Ese comando te devolverá otro comando para ejecutar con sudo. Cópialo y ejecútalo.
+
+LUEGO EL COMANDO:
+
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u admin --hp /home/admin
+pm2 save
+
+VER LOGS
+pm2 logs ecoproductgt

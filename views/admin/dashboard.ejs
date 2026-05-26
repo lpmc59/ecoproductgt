@@ -1,0 +1,72 @@
+<% const pageId = 'dashboard'; %>
+<%- include('../partials/admin-layout') %>
+
+<main class="admin-main">
+  <div class="admin-topbar">
+    <h1>Dashboard</h1>
+    <div class="user-info">
+      <span class="user-badge"><i class="fas fa-user"></i> <%= user.username %></span>
+      <a href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
+    </div>
+  </div>
+  <div class="admin-content">
+    <% if (flash && flash.message) { %>
+    <div class="alert alert-<%= flash.type === 'error' ? 'error' : 'success' %>">
+      <i class="fas fa-<%= flash.type === 'error' ? 'exclamation-circle' : 'check-circle' %>"></i> <%= flash.message %>
+    </div>
+    <% } %>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#ecfdf5;color:#059669;"><i class="fas fa-box"></i></div>
+        <div class="stat-value"><%= db.products.length %></div>
+        <div class="stat-label">Productos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#dbeafe;color:#2563eb;"><i class="fas fa-layer-group"></i></div>
+        <div class="stat-value"><%= db.categories.length %></div>
+        <div class="stat-label">Categorías</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fef3c7;color:#d97706;"><i class="fas fa-users"></i></div>
+        <div class="stat-value"><%= db.users.length %></div>
+        <div class="stat-label">Usuarios</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fce7f3;color:#db2777;"><i class="fas fa-globe"></i></div>
+        <div class="stat-value">Activo</div>
+        <div class="stat-label">Estado del Sitio</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+      <div class="admin-card">
+        <h3><i class="fas fa-bolt"></i> Acciones Rápidas</h3>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <a href="/admin/content" class="btn-admin btn-save" style="justify-content:center;"><i class="fas fa-pen"></i> Editar Contenido del Sitio</a>
+          <a href="/admin/products/new" class="btn-admin btn-info" style="justify-content:center;"><i class="fas fa-plus"></i> Agregar Producto</a>
+          <a href="/admin/products" class="btn-admin btn-secondary" style="justify-content:center;"><i class="fas fa-list"></i> Ver Todos los Productos</a>
+          <a href="/" target="_blank" class="btn-admin btn-secondary" style="justify-content:center;"><i class="fas fa-external-link-alt"></i> Ver Sitio Web</a>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h3><i class="fas fa-box"></i> Últimos Productos</h3>
+        <table class="admin-table">
+          <thead><tr><th>Imagen</th><th>Nombre</th><th>Categoría</th></tr></thead>
+          <tbody>
+            <% db.products.slice(0, 5).forEach(p => { %>
+            <tr>
+              <td><img src="<%= p.productImage %>" alt="<%= p.name %>"></td>
+              <td><strong><%= p.name %></strong><br><span style="font-size:0.8rem;color:#6b7280;"><%= p.subtitle %></span></td>
+              <td><%= (db.categories.find(c => c.id === p.category) || {}).name || p.category %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

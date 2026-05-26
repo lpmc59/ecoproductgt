@@ -1,0 +1,77 @@
+<% const pageId = 'users'; %>
+<%- include('../partials/admin-layout') %>
+
+<main class="admin-main">
+  <div class="admin-topbar">
+    <h1><i class="fas fa-users"></i> Gestión de Usuarios</h1>
+    <div class="user-info">
+      <span class="user-badge"><i class="fas fa-shield-halved"></i> Admin</span>
+    </div>
+  </div>
+  <div class="admin-content">
+    <% if (flash && flash.message) { %>
+    <div class="alert alert-<%= flash.type === 'error' ? 'error' : 'success' %>">
+      <i class="fas fa-<%= flash.type === 'error' ? 'exclamation-circle' : 'check-circle' %>"></i> <%= flash.message %>
+    </div>
+    <% } %>
+
+    <!-- New User Form -->
+    <div class="admin-card">
+      <h3><i class="fas fa-user-plus"></i> Crear Nuevo Usuario</h3>
+      <form method="POST" action="/admin/users/new">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre de Usuario</label>
+            <input type="text" name="username" required placeholder="Ingresa el nombre de usuario">
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" name="password" required placeholder="Mínimo 6 caracteres">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Rol</label>
+          <select name="role">
+            <option value="editor">Editor - Puede editar contenido y productos</option>
+            <option value="admin">Admin - Acceso completo incluyendo usuarios</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-admin btn-save"><i class="fas fa-user-plus"></i> Crear Usuario</button>
+      </form>
+    </div>
+
+    <!-- Users List -->
+    <div class="admin-card">
+      <h3><i class="fas fa-list"></i> Usuarios Registrados</h3>
+      <table class="admin-table">
+        <thead>
+          <tr><th>ID</th><th>Usuario</th><th>Rol</th><th>Creado</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <% users.forEach(u => { %>
+          <tr>
+            <td>#<%= u.id %></td>
+            <td><strong><%= u.username %></strong> <%= u.id === user.id ? '(tú)' : '' %></td>
+            <td><span class="badge badge-<%= u.role %>"><%= u.role %></span></td>
+            <td style="font-size:0.82rem;color:#6b7280;"><%= u.createdAt ? new Date(u.createdAt).toLocaleDateString('es') : '-' %></td>
+            <td style="white-space:nowrap;">
+              <!-- Change Password -->
+              <form method="POST" action="/admin/users/change-password/<%= u.id %>" style="display:inline-flex;gap:0.25rem;align-items:center;">
+                <input type="password" name="password" placeholder="Nueva contraseña" style="padding:0.35rem 0.5rem;border:1px solid #d1d5db;border-radius:6px;font-size:0.8rem;width:130px;">
+                <button type="submit" class="btn-admin btn-secondary" style="padding:0.35rem 0.5rem;font-size:0.8rem;"><i class="fas fa-key"></i></button>
+              </form>
+              <% if (u.id !== user.id) { %>
+              <form method="POST" action="/admin/users/delete/<%= u.id %>" style="display:inline;" onsubmit="return confirm('¿Eliminar este usuario?')">
+                <button type="submit" class="btn-admin btn-danger" style="padding:0.35rem 0.5rem;font-size:0.8rem;"><i class="fas fa-trash"></i></button>
+              </form>
+              <% } %>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+</body>
+</html>

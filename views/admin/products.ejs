@@ -1,0 +1,45 @@
+<% const pageId = 'products'; %>
+<%- include('../partials/admin-layout') %>
+
+<main class="admin-main">
+  <div class="admin-topbar">
+    <h1><i class="fas fa-box"></i> Productos</h1>
+    <div class="user-info">
+      <a href="/admin/products/new" class="btn-admin btn-save"><i class="fas fa-plus"></i> Nuevo Producto</a>
+    </div>
+  </div>
+  <div class="admin-content">
+    <% if (flash && flash.message) { %>
+    <div class="alert alert-<%= flash.type === 'error' ? 'error' : 'success' %>">
+      <i class="fas fa-<%= flash.type === 'error' ? 'exclamation-circle' : 'check-circle' %>"></i> <%= flash.message %>
+    </div>
+    <% } %>
+
+    <div class="admin-card">
+      <table class="admin-table">
+        <thead>
+          <tr><th>Imagen</th><th>Nombre</th><th>Subtítulo</th><th>Categoría</th><th>Orden</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <% products.sort((a,b) => a.order - b.order).forEach(p => { %>
+          <tr>
+            <td><img src="<%= p.productImage %>" alt="<%= p.name %>"></td>
+            <td><strong><%= p.name %></strong></td>
+            <td style="font-size:0.85rem;color:#6b7280;"><%= p.subtitle %></td>
+            <td><%= (categories.find(c => c.id === p.category) || {}).name || p.category %></td>
+            <td><%= p.order %></td>
+            <td style="white-space:nowrap;">
+              <a href="/admin/products/edit/<%= p.id %>" class="btn-admin btn-secondary btn-sm"><i class="fas fa-edit"></i> Editar</a>
+              <form method="POST" action="/admin/products/delete/<%= p.id %>" style="display:inline;" onsubmit="return confirm('¿Eliminar este producto?')">
+                <button type="submit" class="btn-admin btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+</body>
+</html>

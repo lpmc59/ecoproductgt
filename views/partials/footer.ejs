@@ -1,0 +1,97 @@
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div>
+        <h4><i class="fas fa-droplet"></i> EcoProduct</h4>
+        <p style="margin-bottom:1rem;">Soluciones biotecnológicas para el tratamiento de agua. Microorganismos especializados que cuidan el planeta.</p>
+        <p><i class="fas fa-envelope"></i> <%= content.contactEmail %></p>
+      </div>
+      <div>
+        <h4>Soluciones</h4>
+        <ul class="footer-links">
+          <% categories.forEach(cat => { %>
+          <li><a href="/categoria/<%= cat.id %>"><%= cat.name %></a></li>
+          <% }); %>
+        </ul>
+      </div>
+      <div>
+        <h4>Servicios</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="showModal('info')">Más Información</a></li>
+          <li><a href="#" onclick="showModal('precios')">Precios</a></li>
+          <li><a href="#" onclick="showModal('pedidos')">Pedidos</a></li>
+          <li><a href="#" onclick="showModal('whatsapp')">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <%= content.footerText %>
+    </div>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-info">
+  <div class="modal">
+    <div class="modal-icon"><i class="fas fa-circle-info"></i></div>
+    <h3>Más Información</h3>
+    <p>Esta función estará disponible próximamente. Estamos trabajando para brindarte la mejor experiencia.</p>
+    <div style="background:var(--green-50);border-radius:12px;padding:1rem;margin-bottom:1.25rem;"><span style="font-size:1.5rem;">🚀</span><br><strong style="color:var(--green-700);">Próximamente Disponible</strong></div>
+    <button class="btn btn-green" onclick="closeModals()">Entendido</button>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-precios">
+  <div class="modal">
+    <div class="modal-icon"><i class="fas fa-tags"></i></div>
+    <h3>Lista de Precios</h3>
+    <p>Próximamente podrás consultar precios actualizados directamente desde nuestra plataforma.</p>
+    <div style="background:var(--green-50);border-radius:12px;padding:1rem;margin-bottom:1.25rem;"><span style="font-size:1.5rem;">💰</span><br><strong style="color:var(--green-700);">Próximamente Disponible</strong></div>
+    <button class="btn btn-green" onclick="closeModals()">Entendido</button>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-pedidos">
+  <div class="modal">
+    <div class="modal-icon"><i class="fas fa-cart-shopping"></i></div>
+    <h3>Realizar Pedidos</h3>
+    <p>Estamos preparando nuestro sistema de pedidos en línea para que puedas ordenar fácilmente.</p>
+    <div style="background:var(--green-50);border-radius:12px;padding:1rem;margin-bottom:1.25rem;"><span style="font-size:1.5rem;">📦</span><br><strong style="color:var(--green-700);">Próximamente Disponible</strong></div>
+    <button class="btn btn-green" onclick="closeModals()">Entendido</button>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-whatsapp">
+  <div class="modal">
+    <div class="modal-icon" style="background:#dcfce7;"><i class="fab fa-whatsapp" style="color:#16a34a;font-size:2.5rem;"></i></div>
+    <h3>WhatsApp</h3>
+    <p>Próximamente podrás contactarnos directamente por WhatsApp para consultas rápidas.</p>
+    <div style="background:var(--green-50);border-radius:12px;padding:1rem;margin-bottom:1.25rem;"><span style="font-size:1.5rem;">💬</span><br><strong style="color:var(--green-700);">Próximamente Disponible</strong></div>
+    <button class="btn btn-green" onclick="closeModals()">Entendido</button>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-contacto">
+  <div class="modal">
+    <div class="modal-icon"><i class="fas fa-headset"></i></div>
+    <h3>Contacto</h3>
+    <p>Nuestro formulario de contacto estará habilitado muy pronto. Mientras tanto puedes escribirnos a:</p>
+    <p style="font-weight:600;color:var(--green-700);margin-bottom:1rem;"><%= content.contactEmail %></p>
+    <div style="background:var(--green-50);border-radius:12px;padding:1rem;margin-bottom:1.25rem;"><span style="font-size:1.5rem;">📧</span><br><strong style="color:var(--green-700);">Próximamente Disponible</strong></div>
+    <button class="btn btn-green" onclick="closeModals()">Entendido</button>
+  </div>
+</div>
+
+<script>
+function showModal(type) {
+  event && event.preventDefault();
+  closeModals();
+  const m = document.getElementById('modal-' + type);
+  if (m) m.classList.add('active');
+}
+function closeModals() {
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) closeModals(); });
+});
+</script>
+</body>
+</html>

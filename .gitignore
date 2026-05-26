@@ -1,0 +1,22 @@
+# Dependencias
+node_modules/
+
+# Datos generados en runtime (vivos en cada entorno)
+data/db.json
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Logs y temporales
+*.log
+npm-debug.log*
+.npm/
+
+# macOS / editores
+.DS_Store
+.idea/
+.vscode/
+
+# Variables de entorno (por si se agrega .env más adelante)
+.env
+.env.local
+.env.*.local

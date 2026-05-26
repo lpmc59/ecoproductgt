@@ -1,0 +1,111 @@
+<%- include('partials/header') %>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg">
+    <img src="<%= content.heroImage %>" alt="EcoProduct Hero">
+  </div>
+  <div class="hero-content">
+    <h1><%= content.heroTitle %></h1>
+    <p class="subtitle"><%= content.heroSubtitle %></p>
+    <p class="description"><%= content.heroDescription %></p>
+    <p class="tagline"><%= content.heroTagline %></p>
+    <div class="hero-actions">
+      <a href="#soluciones" class="btn btn-primary"><i class="fas fa-flask"></i> Ver Soluciones</a>
+      <a href="https://successo.vercel.app/" target="_blank" class="btn btn-outline" style="background:rgba(255,255,255,0.15);border-color:var(--white);"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="#" class="btn btn-outline" onclick="showModal('info')"><i class="fas fa-info-circle"></i> Más Información</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="section" style="padding:3rem 1.5rem;">
+  <div class="section-container">
+    <div class="cta-grid">
+      <div class="cta-card" onclick="showModal('info')">
+        <div class="cta-icon"><i class="fas fa-circle-info"></i></div>
+        <h4>Más Información</h4>
+        <p>Conoce más sobre nuestros productos y soluciones</p>
+      </div>
+      <div class="cta-card" onclick="showModal('precios')">
+        <div class="cta-icon"><i class="fas fa-tags"></i></div>
+        <h4>Precios</h4>
+        <p>Consulta nuestros precios y presentaciones</p>
+      </div>
+      <div class="cta-card" onclick="showModal('pedidos')">
+        <div class="cta-icon"><i class="fas fa-cart-shopping"></i></div>
+        <h4>Pedidos</h4>
+        <p>Realiza tu pedido de forma rápida y fácil</p>
+      </div>
+      <div class="cta-card" onclick="showModal('whatsapp')">
+        <div class="cta-icon" style="background:#dcfce7;"><i class="fab fa-whatsapp" style="color:#16a34a;"></i></div>
+        <h4>WhatsApp</h4>
+        <p>Contáctanos directamente por WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCIONES -->
+<section class="section section-alt" id="soluciones">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Nuestras Soluciones</h2>
+      <p>Líneas especializadas de productos biológicos para cada necesidad</p>
+    </div>
+    <div class="categories-grid">
+      <% categories.sort((a,b) => a.order - b.order).forEach(cat => { %>
+      <a href="/categoria/<%= cat.id %>" class="category-card">
+        <div class="icon"><i class="fas <%= cat.icon %>"></i></div>
+        <h3><%= cat.name %></h3>
+        <p><%= cat.description %></p>
+      </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section class="section" id="productos">
+  <div class="section-container">
+    <div class="section-header">
+      <h2>Productos Destacados</h2>
+      <p>Conoce nuestra gama de productos con tecnología biológica avanzada</p>
+    </div>
+    <div class="products-grid">
+      <% products.sort((a,b) => a.order - b.order).forEach(product => { %>
+      <a href="/producto/<%= product.id %>" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-card-img">
+          <img src="<%= product.productImage %>" alt="<%= product.name %>">
+        </div>
+        <div class="product-card-body">
+          <h3><%= product.name %></h3>
+          <div class="product-subtitle"><%= product.subtitle %></div>
+          <p><%= product.description %></p>
+          <div class="product-format"><i class="fas fa-box"></i> <%= product.format %></div>
+        </div>
+      </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section class="section section-alt" id="nosotros">
+  <div class="section-container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2><%= content.aboutTitle %></h2>
+        <p><%= content.aboutText %></p>
+      </div>
+      <div class="about-visual">
+        <div class="about-stat"><div class="stat-number">100%</div><div class="stat-label">Biodegradable</div></div>
+        <div class="about-stat"><div class="stat-number">0</div><div class="stat-label">Químicos Agresivos</div></div>
+        <div class="about-stat"><div class="stat-number">4+</div><div class="stat-label">Líneas de Producto</div></div>
+        <div class="about-stat"><div class="stat-number">7+</div><div class="stat-label">Productos</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
