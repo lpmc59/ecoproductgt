@@ -41,14 +41,23 @@
             <label>Categoría</label>
             <select name="category">
               <% categories.forEach(cat => { %>
-              <option value="<%= cat.id %>" <%= product.category === cat.id ? 'selected' : '' %>><%= cat.name %></option>
+              <option value="<%= cat.id %>" <%= product.category === cat.id ? 'selected' : '' %>><%= cat.name %><%= cat.fase ? ' (Fase ' + cat.fase + ')' : '' %></option>
               <% }); %>
             </select>
           </div>
         </div>
-        <div class="form-group">
-          <label>Orden (número)</label>
-          <input type="number" name="order" value="<%= product.order %>" min="1">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fase</label>
+            <select name="fase">
+              <option value="I"  <%= (product.fase || 'I') === 'I'  ? 'selected' : '' %>>Fase I — Línea histórica</option>
+              <option value="II" <%= product.fase === 'II' ? 'selected' : '' %>>Fase II — Plantas de tratamiento</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Orden (número)</label>
+            <input type="number" name="order" value="<%= product.order %>" min="1">
+          </div>
         </div>
         <div class="form-group">
           <label>Beneficios (uno por línea)</label>
@@ -73,6 +82,32 @@
             <% } %>
             <input type="file" name="logoImage" accept="image/*">
           </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h3><i class="fas fa-flask"></i> Bloques de contenido Fase II (opcionales)</h3>
+        <p style="color:var(--gray-500);font-size:.9rem;margin-bottom:1rem;">Estos campos solo aparecen en la página del producto si los completas. Útiles para los productos Fase II (BacVita, Simbiótica, Respiro, etc.).</p>
+
+        <div class="form-group">
+          <label>Justificación del concepto</label>
+          <textarea name="justificacion" style="min-height:140px;"><%= product.justificacion || '' %></textarea>
+        </div>
+        <div class="form-group">
+          <label>Alcance preliminar</label>
+          <textarea name="alcancePreliminar" style="min-height:120px;"><%= product.alcancePreliminar || '' %></textarea>
+        </div>
+        <div class="form-group">
+          <label>Lo que busca</label>
+          <textarea name="loQueBusca" style="min-height:120px;"><%= product.loQueBusca || '' %></textarea>
+        </div>
+        <div class="form-group">
+          <label>Lo que queda sujeto a validación</label>
+          <textarea name="loQueValida" style="min-height:120px;"><%= product.loQueValida || '' %></textarea>
+        </div>
+        <div class="form-group">
+          <label>Lo que no debe prometer</label>
+          <textarea name="loQueNoPromete" style="min-height:120px;"><%= product.loQueNoPromete || '' %></textarea>
         </div>
       </div>
 

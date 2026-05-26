@@ -46,49 +46,159 @@
   </div>
 </section>
 
+<%
+  // Particionar por fase con fallback (sin fase = Fase I)
+  var catsII = categories.filter(function(c){ return c.fase === 'II'; }).sort(function(a,b){ return a.order - b.order; });
+  var catsI  = categories.filter(function(c){ return c.fase !== 'II'; }).sort(function(a,b){ return a.order - b.order; });
+  var prodsII = products.filter(function(p){ return p.fase === 'II'; }).sort(function(a,b){ return a.order - b.order; });
+  var prodsI  = products.filter(function(p){ return p.fase !== 'II'; }).sort(function(a,b){ return a.order - b.order; });
+
+  // Helper imagen con fallback genérico
+  function productImg(p){ return p.productImage && p.productImage.length ? p.productImage : ''; }
+%>
+
 <!-- SOLUCIONES -->
 <section class="section section-alt" id="soluciones">
   <div class="section-container">
-    <div class="section-header">
-      <h2>Nuestras Soluciones</h2>
-      <p>Líneas especializadas de productos biológicos para cada necesidad</p>
+
+    <!-- FASE II -->
+    <% if (catsII.length > 0) { %>
+    <div class="fase-block fase-ii">
+      <div class="fase-badge"><i class="fas fa-flask"></i> Fase II</div>
+      <div class="section-header" style="margin-bottom:1.5rem;">
+        <h2><%= content.faseIITitle || 'Fase II — Plantas de Tratamiento' %></h2>
+        <p style="max-width:760px;margin:0 auto;"><%= content.faseIIIntro || '' %></p>
+      </div>
+      <div class="categories-grid">
+        <% catsII.forEach(function(cat){ %>
+        <a href="/categoria/<%= cat.id %>" class="category-card category-card--fase-ii">
+          <div class="icon"><i class="fas <%= cat.icon %>"></i></div>
+          <h3><%= cat.name %></h3>
+          <p><%= cat.description %></p>
+        </a>
+        <% }); %>
+      </div>
     </div>
-    <div class="categories-grid">
-      <% categories.sort((a,b) => a.order - b.order).forEach(cat => { %>
-      <a href="/categoria/<%= cat.id %>" class="category-card">
-        <div class="icon"><i class="fas <%= cat.icon %>"></i></div>
-        <h3><%= cat.name %></h3>
-        <p><%= cat.description %></p>
-      </a>
+    <% } %>
+
+    <!-- FASE I -->
+    <% if (catsI.length > 0) { %>
+    <div class="fase-block fase-i" style="margin-top:4rem;">
+      <div class="fase-badge fase-badge--secondary"><i class="fas fa-leaf"></i> Fase I</div>
+      <div class="section-header" style="margin-bottom:1.5rem;">
+        <h2><%= content.faseITitle || 'Fase I — Línea Histórica' %></h2>
+        <p style="max-width:760px;margin:0 auto;"><%= content.faseISubtitle || '' %></p>
+      </div>
+      <div class="categories-grid">
+        <% catsI.forEach(function(cat){ %>
+        <a href="/categoria/<%= cat.id %>" class="category-card">
+          <div class="icon"><i class="fas <%= cat.icon %>"></i></div>
+          <h3><%= cat.name %></h3>
+          <p><%= cat.description %></p>
+        </a>
+        <% }); %>
+      </div>
+    </div>
+    <% } %>
+
+  </div>
+</section>
+
+<!-- CONCEPTO DE NEGOCIO -->
+<% if (content.conceptos) { %>
+<section class="section" id="concepto">
+  <div class="section-container">
+    <div class="section-header">
+      <h2><%= content.conceptosTitle || 'Concepto de Negocio' %></h2>
+      <p style="max-width:760px;margin:0 auto;"><%= content.conceptosIntro || '' %></p>
+    </div>
+    <div class="conceptos-grid">
+      <% ['mercado','oferta','distribucion','produccion','modelo'].forEach(function(key){ %>
+        <% var c = content.conceptos[key]; if (!c) return; %>
+        <div class="concepto-card">
+          <div class="concepto-icon"><i class="fas <%= c.icon || 'fa-circle' %>"></i></div>
+          <h4><%= c.titulo %></h4>
+          <p><%= c.texto %></p>
+        </div>
       <% }); %>
     </div>
   </div>
 </section>
+<% } %>
 
 <!-- PRODUCTOS DESTACADOS -->
-<section class="section" id="productos">
+<section class="section section-alt" id="productos">
   <div class="section-container">
+
+    <% if (prodsII.length > 0) { %>
     <div class="section-header">
-      <h2>Productos Destacados</h2>
-      <p>Conoce nuestra gama de productos con tecnología biológica avanzada</p>
+      <h2>Productos Fase II</h2>
+      <p>Soluciones microbiológicas para PTAR hospitalarias, industriales y municipales</p>
     </div>
     <div class="products-grid">
-      <% products.sort((a,b) => a.order - b.order).forEach(product => { %>
+      <% prodsII.forEach(function(product){ %>
       <a href="/producto/<%= product.id %>" class="product-card" style="text-decoration:none;color:inherit;">
         <div class="product-card-img">
-          <img src="<%= product.productImage %>" alt="<%= product.name %>">
+          <% if (productImg(product)) { %>
+          <img src="<%= productImg(product) %>" alt="<%= product.name %>">
+          <% } else { %>
+          <div style="text-align:center;color:var(--gray-400);"><i class="fas fa-flask" style="font-size:3.5rem;display:block;margin-bottom:0.5rem;"></i><span style="font-size:0.8rem;">Imagen próximamente</span></div>
+          <% } %>
         </div>
         <div class="product-card-body">
           <h3><%= product.name %></h3>
           <div class="product-subtitle"><%= product.subtitle %></div>
           <p><%= product.description %></p>
-          <div class="product-format"><i class="fas fa-box"></i> <%= product.format %></div>
+          <% if (product.format) { %><div class="product-format"><i class="fas fa-box"></i> <%= product.format %></div><% } %>
         </div>
       </a>
       <% }); %>
     </div>
+    <% } %>
+
+    <% if (prodsI.length > 0) { %>
+    <div class="section-header" style="margin-top:<%= prodsII.length > 0 ? '4rem' : '0' %>;">
+      <h2>Productos Fase I</h2>
+      <p>Nuestra gama original de productos con tecnología biológica avanzada</p>
+    </div>
+    <div class="products-grid">
+      <% prodsI.forEach(function(product){ %>
+      <a href="/producto/<%= product.id %>" class="product-card" style="text-decoration:none;color:inherit;">
+        <div class="product-card-img">
+          <% if (productImg(product)) { %>
+          <img src="<%= productImg(product) %>" alt="<%= product.name %>">
+          <% } else { %>
+          <div style="text-align:center;color:var(--gray-400);"><i class="fas fa-flask" style="font-size:3.5rem;display:block;margin-bottom:0.5rem;"></i><span style="font-size:0.8rem;">Imagen próximamente</span></div>
+          <% } %>
+        </div>
+        <div class="product-card-body">
+          <h3><%= product.name %></h3>
+          <div class="product-subtitle"><%= product.subtitle %></div>
+          <p><%= product.description %></p>
+          <% if (product.format) { %><div class="product-format"><i class="fas fa-box"></i> <%= product.format %></div><% } %>
+        </div>
+      </a>
+      <% }); %>
+    </div>
+    <% } %>
+
   </div>
 </section>
+
+<style>
+  .fase-block .fase-badge { display:inline-flex; align-items:center; gap:.4rem; background:var(--green-600); color:var(--white); padding:.35rem .9rem; border-radius:999px; font-size:.78rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:1rem; }
+  .fase-block .fase-badge--secondary { background:var(--green-50); color:var(--green-700); border:1px solid var(--green-100); }
+  .fase-block { text-align:center; }
+  .category-card--fase-ii { border-color: var(--green-300); }
+  .category-card--fase-ii .icon { background: var(--green-100); }
+
+  .conceptos-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; }
+  .concepto-card { background:var(--white); border:1px solid var(--gray-200); border-radius:14px; padding:1.5rem; transition: all .3s; }
+  .concepto-card:hover { border-color:var(--green-400); box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+  .concepto-card .concepto-icon { width:48px; height:48px; border-radius:12px; background:var(--green-50); display:flex; align-items:center; justify-content:center; color:var(--green-600); font-size:1.2rem; margin-bottom:.85rem; }
+  .concepto-card h4 { color:var(--green-900); font-size:1.05rem; margin-bottom:.4rem; font-weight:700; }
+  .concepto-card p { font-size:.88rem; color:var(--gray-600); line-height:1.55; }
+</style>
 
 <!-- NOSOTROS -->
 <section class="section section-alt" id="nosotros">

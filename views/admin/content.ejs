@@ -82,6 +82,71 @@
         </div>
       </div>
 
+      <div class="admin-card">
+        <h3><i class="fas fa-flask"></i> Fase II — Plantas de Tratamiento</h3>
+        <div class="form-group">
+          <label>Título de la sección Fase II</label>
+          <input type="text" name="faseIITitle" value="<%= content.faseIITitle || '' %>" placeholder="Fase II — Plantas de Tratamiento">
+        </div>
+        <div class="form-group">
+          <label>Texto introductorio Fase II</label>
+          <textarea name="faseIIIntro" style="min-height:90px;"><%= content.faseIIIntro || '' %></textarea>
+          <small style="color:var(--gray-500);">Aparece debajo del título, sobre las 3 categorías de Fase II.</small>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h3><i class="fas fa-leaf"></i> Fase I — Línea Histórica</h3>
+        <div class="form-group">
+          <label>Título de la sección Fase I</label>
+          <input type="text" name="faseITitle" value="<%= content.faseITitle || '' %>" placeholder="Fase I — Línea Histórica">
+        </div>
+        <div class="form-group">
+          <label>Subtítulo / introducción Fase I</label>
+          <textarea name="faseISubtitle" style="min-height:80px;"><%= content.faseISubtitle || '' %></textarea>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h3><i class="fas fa-diagram-project"></i> Concepto de Negocio</h3>
+        <div class="form-group">
+          <label>Título de la sección</label>
+          <input type="text" name="conceptosTitle" value="<%= content.conceptosTitle || '' %>" placeholder="Concepto de Negocio">
+        </div>
+        <div class="form-group">
+          <label>Texto introductorio</label>
+          <textarea name="conceptosIntro" style="min-height:80px;"><%= content.conceptosIntro || '' %></textarea>
+        </div>
+
+        <% var conceptos = content.conceptos || {}; %>
+        <% [
+          { key:'mercado',      label:'Mercado' },
+          { key:'oferta',       label:'Oferta' },
+          { key:'distribucion', label:'Distribución' },
+          { key:'produccion',   label:'Producción' },
+          { key:'modelo',       label:'Modelo de Negocio' }
+        ].forEach(function(item){
+          var c = conceptos[item.key] || {}; %>
+          <div style="border:1px solid var(--gray-200);border-radius:10px;padding:1rem;margin-bottom:.75rem;background:var(--gray-50);">
+            <strong style="color:var(--green-800);font-size:.95rem;">📌 <%= item.label %></strong>
+            <div class="form-row" style="margin-top:.5rem;">
+              <div class="form-group" style="flex:1;">
+                <label>Título</label>
+                <input type="text" name="concepto_<%= item.key %>_titulo" value="<%= c.titulo || '' %>">
+              </div>
+              <div class="form-group" style="width:200px;">
+                <label>Icono (Font Awesome)</label>
+                <input type="text" name="concepto_<%= item.key %>_icon" value="<%= c.icon || '' %>" placeholder="fa-bullseye">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Texto / pregunta</label>
+              <textarea name="concepto_<%= item.key %>_texto" style="min-height:70px;"><%= c.texto || '' %></textarea>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+
       <button type="submit" class="btn-admin btn-save" style="padding:0.85rem 2.5rem;font-size:0.95rem;">
         <i class="fas fa-save"></i> Guardar Todos los Cambios
       </button>

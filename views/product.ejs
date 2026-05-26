@@ -66,6 +66,70 @@
       </div>
     </div>
 
+    <%
+      // Helper para renderizar texto multilínea como párrafos
+      function renderParagraphs(s){
+        if (!s) return '';
+        return s.split(/\n\n+/).map(function(p){
+          return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+        }).join('');
+      }
+      var hasFaseII = product.justificacion || product.alcancePreliminar || product.loQueBusca || product.loQueValida || product.loQueNoPromete;
+    %>
+
+    <% if (hasFaseII) { %>
+    <div class="fase-ii-blocks">
+      <% if (product.justificacion) { %>
+      <div class="block-card block-justificacion">
+        <h3><i class="fas fa-lightbulb"></i> Justificación del concepto</h3>
+        <div class="block-body"><%- renderParagraphs(product.justificacion) %></div>
+      </div>
+      <% } %>
+
+      <% if (product.alcancePreliminar) { %>
+      <div class="block-card block-alcance">
+        <h3><i class="fas fa-clipboard-list"></i> Alcance preliminar</h3>
+        <div class="block-body"><%- renderParagraphs(product.alcancePreliminar) %></div>
+      </div>
+      <% } %>
+
+      <% if (product.loQueBusca) { %>
+      <div class="block-card block-busca">
+        <h3><i class="fas fa-bullseye"></i> Lo que busca</h3>
+        <div class="block-body"><%- renderParagraphs(product.loQueBusca) %></div>
+      </div>
+      <% } %>
+
+      <% if (product.loQueValida) { %>
+      <div class="block-card block-valida">
+        <h3><i class="fas fa-vial"></i> Lo que queda sujeto a validación</h3>
+        <div class="block-body"><%- renderParagraphs(product.loQueValida) %></div>
+      </div>
+      <% } %>
+
+      <% if (product.loQueNoPromete) { %>
+      <div class="block-card block-nopromete">
+        <h3><i class="fas fa-circle-exclamation"></i> Lo que no debe prometer</h3>
+        <div class="block-body"><%- renderParagraphs(product.loQueNoPromete) %></div>
+      </div>
+      <% } %>
+    </div>
+    <style>
+      .fase-ii-blocks { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.25rem; }
+      .block-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 1.5rem 1.75rem; border-left: 4px solid var(--green-500); }
+      .block-card h3 { color: var(--green-900); font-size: 1.1rem; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.55rem; }
+      .block-card h3 i { color: var(--green-600); }
+      .block-card .block-body p { font-size: 0.95rem; color: var(--gray-700); line-height: 1.75; margin-bottom: 0.85rem; }
+      .block-card .block-body p:last-child { margin-bottom: 0; }
+      .block-nopromete { border-left-color: #d97706; background: #fffbeb; }
+      .block-nopromete h3 { color: #92400e; }
+      .block-nopromete h3 i { color: #d97706; }
+      .block-valida { border-left-color: #2563eb; background: #eff6ff; }
+      .block-valida h3 { color: #1e3a8a; }
+      .block-valida h3 i { color: #2563eb; }
+    </style>
+    <% } %>
+
     <% if (product.casosExito && product.casosExito.length > 0) { %>
     <!-- CASOS DE ÉXITO -->
     <div class="casos-exito">

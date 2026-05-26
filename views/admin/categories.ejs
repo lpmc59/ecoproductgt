@@ -15,34 +15,92 @@
     </div>
     <% } %>
 
-    <% categories.sort((a,b) => a.order - b.order).forEach(cat => { %>
-    <div class="admin-card">
-      <form method="POST" action="/admin/categories/edit/<%= cat.id %>">
-        <h3><i class="fas <%= cat.icon %>"></i> <%= cat.name %></h3>
+    <% ['II', 'I'].forEach(function(faseGroup){
+         var grupo = categories.filter(function(c){ return (c.fase || 'I') === faseGroup; }).sort(function(a,b){ return a.order - b.order; });
+         if (grupo.length === 0) return; %>
+      <h2 style="margin:1.5rem 0 .75rem;color:var(--green-800);font-size:1.15rem;">
+        <i class="fas <%= faseGroup === 'II' ? 'fa-flask' : 'fa-leaf' %>"></i>
+        Fase <%= faseGroup %> <span style="font-weight:400;color:var(--gray-500);font-size:.9rem;">(<%= grupo.length %>)</span>
+      </h2>
+      <% grupo.forEach(function(cat){ %>
+        <div class="admin-card">
+          <form method="POST" action="/admin/categories/edit/<%= cat.id %>">
+            <h3><i class="fas <%= cat.icon %>"></i> <%= cat.name %>
+              <small style="color:var(--gray-500);font-weight:400;font-size:.85rem;">— id: <code><%= cat.id %></code></small>
+            </h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="name" value="<%= cat.name %>">
+              </div>
+              <div class="form-group">
+                <label>Icono (Font Awesome class)</label>
+                <input type="text" name="icon" value="<%= cat.icon %>" placeholder="fa-house">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Descripción</label>
+                <input type="text" name="description" value="<%= cat.description %>">
+              </div>
+              <div class="form-group">
+                <label>Orden</label>
+                <input type="number" name="order" value="<%= cat.order %>" min="1">
+              </div>
+              <div class="form-group">
+                <label>Fase</label>
+                <select name="fase">
+                  <option value="I"  <%= (cat.fase || 'I') === 'I'  ? 'selected' : '' %>>Fase I</option>
+                  <option value="II" <%= cat.fase === 'II' ? 'selected' : '' %>>Fase II</option>
+                </select>
+              </div>
+            </div>
+            <div style="display:flex;gap:.5rem;align-items:center;">
+              <button type="submit" class="btn-admin btn-save"><i class="fas fa-save"></i> Guardar</button>
+            </div>
+          </form>
+          <form method="POST" action="/admin/categories/delete/<%= cat.id %>" style="display:inline;margin-top:.5rem;" onsubmit="return confirm('¿Eliminar la categoría &quot;<%= cat.name %>&quot;? Solo se puede si no tiene productos asignados.');">
+            <button type="submit" class="btn-admin" style="background:#fee2e2;color:#b91c1c;"><i class="fas fa-trash"></i> Eliminar</button>
+          </form>
+        </div>
+      <% }); %>
+    <% }); %>
+
+    <!-- Crear nueva categoría -->
+    <div class="admin-card" style="border:2px dashed var(--green-300);">
+      <h3><i class="fas fa-plus-circle"></i> Crear nueva categoría</h3>
+      <form method="POST" action="/admin/categories/new">
         <div class="form-row">
           <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" name="name" value="<%= cat.name %>">
+            <label>Nombre *</label>
+            <input type="text" name="name" required>
           </div>
           <div class="form-group">
             <label>Icono (Font Awesome class)</label>
-            <input type="text" name="icon" value="<%= cat.icon %>" placeholder="fa-house">
+            <input type="text" name="icon" value="fa-leaf" placeholder="fa-leaf">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Descripción</label>
-            <input type="text" name="description" value="<%= cat.description %>">
+            <input type="text" name="description">
           </div>
           <div class="form-group">
             <label>Orden</label>
-            <input type="number" name="order" value="<%= cat.order %>" min="1">
+            <input type="number" name="order" min="1" placeholder="(auto)">
+          </div>
+          <div class="form-group">
+            <label>Fase</label>
+            <select name="fase">
+              <option value="I">Fase I</option>
+              <option value="II">Fase II</option>
+            </select>
           </div>
         </div>
-        <button type="submit" class="btn-admin btn-save"><i class="fas fa-save"></i> Guardar</button>
+        <button type="submit" class="btn-admin btn-save"><i class="fas fa-plus"></i> Crear categoría</button>
       </form>
     </div>
-    <% }); %>
+
   </div>
 </main>
 </body>

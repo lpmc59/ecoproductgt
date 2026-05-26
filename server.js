@@ -27,12 +27,26 @@ function loadDB() {
         aboutText: 'En EcoProduct desarrollamos soluciones biotecnológicas para el tratamiento de agua. Utilizamos consorcios microbianos especializados que ofrecen alternativas efectivas, sostenibles y seguras para el medio ambiente.',
         footerText: '© 2026 EcoProduct. Todos los derechos reservados.',
         whatsappNumber: '',
-        contactEmail: 'info@ecoproduct.com'
+        contactEmail: 'info@ecoproduct.com',
+        faseIITitle: 'Fase II — Plantas de Tratamiento',
+        faseIIIntro: 'Hemos decidido enfocarnos en plantas de tratamiento hospitalarias, industriales y municipales. En esta sección encontrarán productos dirigidos a cada área.',
+        faseITitle: 'Fase I — Línea Histórica',
+        faseISubtitle: 'Nuestra línea original de productos biotecnológicos para hogar, agricultura y sector hospitalario.',
+        conceptosTitle: 'Concepto de Negocio',
+        conceptosIntro: 'Un concepto de negocio describe la visión simplificada de una oportunidad de mercado: cómo una empresa crea, entrega y captura valor de manera única.',
+        conceptos: {
+          mercado: { titulo: 'Mercado', icon: 'fa-bullseye', texto: '¿Quién es nuestro cliente ideal y qué problema específico le estamos resolviendo?' },
+          oferta: { titulo: 'Oferta', icon: 'fa-box-open', texto: '¿Qué productos o servicios entregamos para satisfacer esa necesidad de forma única?' },
+          distribucion: { titulo: 'Distribución', icon: 'fa-truck', texto: '¿A través de qué canales y procesos hacemos llegar nuestra solución a manos del cliente?' },
+          produccion: { titulo: 'Producción', icon: 'fa-industry', texto: '¿Cómo transformamos nuestros recursos y tecnología en el producto final que entregamos?' },
+          modelo: { titulo: 'Modelo de Negocio', icon: 'fa-chart-line', texto: '¿Cómo capturamos valor económico y aseguramos la viabilidad financiera de la operación?' }
+        }
       },
       products: [
         {
           id: 'greendrain',
           category: 'greendrain',
+          fase: 'I',
           name: 'DRENOVA',
           subtitle: 'Destapador Biológico de Caños',
           description: 'Fórmula líquida con cepas microbianas que descomponen cabello, grasa y residuos orgánicos que obstruyen los caños. Actúa en horas, sin corroer tuberías.',
@@ -45,6 +59,7 @@ function loadDB() {
         {
           id: 'homebio',
           category: 'greendrain',
+          fase: 'I',
           name: 'HOMEBIO',
           subtitle: 'Limpiador Biológico para Cocina y Baño',
           description: 'Líquido con enzimas y microorganismos que desintegran residuos de comida, jabón y grasa en lavamanos y lavaplatos. Sin cloro, sin ácidos, sin fumes tóxicos.',
@@ -57,6 +72,7 @@ function loadDB() {
         {
           id: 'septiclean',
           category: 'greendrain',
+          fase: 'I',
           name: 'SEPTICLEAN',
           subtitle: 'Tratamiento para Fosas Sépticas',
           description: 'Inoculante en polvo con bacterias que reactivan el proceso natural de digestión en fosas sépticas, reduciendo lodos y malos olores.',
@@ -69,6 +85,7 @@ function loadDB() {
         {
           id: 'biogrease',
           category: 'agroflow',
+          fase: 'I',
           name: 'BIOGREASE',
           subtitle: 'Tratamiento para Trampas de Grasa',
           description: 'Polvo concentrado con bacterias especializadas en degradar aceites y grasas en trampas domésticas, antes de que lleguen al drenaje municipal.',
@@ -81,6 +98,7 @@ function loadDB() {
         {
           id: 'mielva',
           category: 'agroflow',
+          fase: 'I',
           name: 'MIELVA',
           subtitle: 'Tratamiento Biológico para Aguas Mieles del Café',
           description: 'Solución microbiológica especializada para el tratamiento de aguas mieles generadas en beneficios húmedos de café. Diseñada para reducir la carga orgánica de forma natural y eficiente.',
@@ -106,6 +124,7 @@ function loadDB() {
         {
           id: 'liptra',
           category: 'agroflow',
+          fase: 'I',
           name: 'LIPTRA',
           subtitle: 'Tratamiento Biológico para Efluentes Cárnicos',
           description: 'Bioformulación de microorganismos y enzimas especializada en el tratamiento de efluentes de rastros y plantas de procesamiento cárnico con alta carga de grasas, sangre y materia orgánica.',
@@ -131,6 +150,7 @@ function loadDB() {
         {
           id: 'verdexa',
           category: 'agroflow',
+          fase: 'I',
           name: 'VERDEXA',
           subtitle: 'Tratamiento de Agua Postcosecha para Frutas y Hortalizas',
           description: 'Solución biológica para el tratamiento y reciclaje de agua en operaciones de empaque postcosecha de frutas y hortalizas. Enfocada en reducir residuos orgánicos antes de que lleguen a ríos y corrientes.',
@@ -156,6 +176,7 @@ function loadDB() {
         {
           id: 'palvera',
           category: 'agroflow',
+          fase: 'I',
           name: 'PALVERA',
           subtitle: 'Bioaugmentación para Plantas Extractoras de Palma',
           description: 'Solución de bioaugmentación diseñada para mejorar el tratamiento de POME (Palm Oil Mill Effluent) en lagunas y biodigestores de plantas extractoras de palma.',
@@ -181,6 +202,7 @@ function loadDB() {
         {
           id: 'biopharma',
           category: 'hospitalwatershield',
+          fase: 'I',
           name: 'BIOPHARMA',
           subtitle: 'Tratamiento de Aguas Residuales Hospitalarias',
           description: 'Consorcio microbiano en formato líquido diseñado para la bioaugmentación de plantas de tratamiento de aguas residuales hospitalarias. Mejora el desempeño biológico de los sistemas existentes.',
@@ -193,6 +215,7 @@ function loadDB() {
         {
           id: 'biopowder',
           category: 'hospitalwatershield',
+          fase: 'I',
           name: 'BIOPOWDER',
           subtitle: 'Bioaugmentación en Polvo Liofilizado',
           description: 'Consorcio microbiano en formato de polvo liofilizado, diseñado para procesos de bioaugmentación en plantas de tratamiento de aguas residuales. Mayor estabilidad y fácil almacenamiento.',
@@ -205,6 +228,7 @@ function loadDB() {
         {
           id: 'bioshield',
           category: 'hospitalwatershield',
+          fase: 'I',
           name: 'BIOSHIELD',
           subtitle: 'Degradación de Compuestos Farmacéuticos',
           description: 'Consorcio microbiano líquido especializado en la degradación de antibióticos y compuestos farmacéuticos complejos presentes en aguas residuales hospitalarias.',
@@ -213,13 +237,68 @@ function loadDB() {
           productImage: '/images/bioshield-product.jpg',
           logoImage: '',
           order: 7
+        },
+        {
+          id: 'bacvita',
+          category: 'hospitalarias',
+          fase: 'II',
+          name: 'BacVita',
+          subtitle: 'Solución microbiológica en polvo para PTAR hospitalarias',
+          description: 'BacVita es una formulación microbiológica en polvo para PTAR hospitalarias, desarrollada con consorcios de Bacillus seleccionados para reforzar la actividad biológica del sistema. Su aplicación bajo protocolo técnico busca mejorar la estabilidad operativa de la planta, apoyar la degradación de carga orgánica y contribuir al manejo de compuestos residuales complejos presentes en aguas hospitalarias, como trazas farmacéuticas, antimicrobianos, detergentes o desinfectantes, sin sustituir la operación adecuada de la PTAR ni prometer cumplimiento automático.',
+          format: 'Polvo, 500 g',
+          benefits: ['Refuerza actividad biológica del sistema', 'Apoya la degradación de carga orgánica compleja', 'Contribuye al manejo de trazas farmacéuticas y desinfectantes'],
+          productImage: '',
+          logoImage: '',
+          order: 1,
+          justificacion: 'El concepto nace de una brecha clara en hospitales: las aguas residuales no llegan separadas por área, sino mezcladas en una sola red hidrosanitaria, incorporando descargas de cocina, lavandería, baños, laboratorios, quirófanos y áreas de limpieza. Esto genera una corriente más compleja que el agua residual doméstica común, con presencia potencial de carga orgánica, grasas, sólidos, nutrientes, desinfectantes, residuos farmacéuticos, antibióticos y microorganismos resistentes.\n\nLa oportunidad también se refuerza por el tipo de contaminantes asociados al sector salud. La OMS reconoce que los residuos de establecimientos de salud pueden incluir productos farmacéuticos, antibióticos, químicos de desinfección y microorganismos resistentes; y la EPA identifica los contaminantes emergentes en aguas residuales como un tema relevante de investigación ambiental.\n\nPor eso, BacVita se propone como una formulación microbiológica en polvo para PTAR hospitalarias, diseñada para fortalecer la actividad biológica del sistema, apoyar la degradación de carga orgánica y contribuir al manejo de compuestos residuales complejos bajo un protocolo técnico de aplicación. No sustituye la PTAR, no garantiza cumplimiento normativo automático y no promete eliminar todos los contaminantes; su valor está en ayudar a que una planta existente opere con mayor estabilidad frente a una corriente hospitalaria compleja.',
+          loQueBusca: 'BacVita promueve reforzar la actividad biológica de PTAR hospitalarias existentes mediante una formulación microbiológica en polvo basada en consorcios de Bacillus. Su función central es apoyar la degradación de carga orgánica y mejorar la estabilidad operativa del sistema, especialmente en plantas que enfrentan corrientes complejas con residuos de limpieza, desinfectantes, nutrientes, grasas, sólidos y posibles trazas farmacéuticas. También promueve una forma de uso más ordenada: diagnóstico inicial, protocolo de aplicación, capacitación, bitácora operativa y seguimiento técnico.',
+          loQueValida: 'El piloto valida si BacVita funciona bajo las condiciones reales de esa PTAR. Esto incluye revisar el agua de entrada, condiciones de operación, pH, aireación, carga orgánica, presencia de químicos/desinfectantes, punto de aplicación y cambios antes/después en parámetros seleccionados.\n\nLas bacterias no funcionan igual en cualquier corriente; dependen de la composición del agua, pretratamiento, oxigenación, pH y estabilidad de carga. Por eso el piloto no es "hacer mil pruebas", sino confirmar que la planta tiene condiciones mínimas para que el producto aporte valor.',
+          loQueNoPromete: 'BacVita no promete eliminación total de antibióticos, remoción completa de fármacos, desinfección, eliminación de patógenos, reducción garantizada de resistencia antimicrobiana ni cumplimiento normativo automático. Su desempeño depende de la composición del efluente, operación de la PTAR, punto de aplicación, dosis y seguimiento técnico.'
+        },
+        {
+          id: 'simbiotica',
+          category: 'industriales',
+          fase: 'II',
+          name: 'Simbiótica',
+          subtitle: 'Solución microbiológica en polvo para PTAR de condominios, parques industriales mixtos e industria textil',
+          description: 'Simbiótica es una solución microbiológica en polvo para plantas de tratamiento de aguas residuales (PTAR) de condominios y complejos habitacionales, parques industriales mixtos e industria textil, desarrollada con consorcios de Bacillus seleccionados para fortalecer la actividad biológica del sistema. Su aplicación ayuda a estabilizar la operación del reactor biológico, acelerar la degradación de la fracción biodegradable de la carga orgánica (DBO5 y porción de la DQO), apoyar el control de surfactantes y olores, y reducir la dependencia operativa de insumos químicos auxiliares, dentro de un esquema técnico de aplicación, monitoreo y seguimiento.',
+          format: 'Polvo',
+          benefits: ['Degrada DBO₅ y fracción biodegradable de DQO', 'Controla surfactantes y olores', 'Reduce dependencia de insumos químicos auxiliares'],
+          productImage: '',
+          logoImage: '',
+          order: 2,
+          justificacion: 'El concepto nace de tres brechas convergentes en el mercado guatemalteco. Primero, los condominios y complejos habitacionales medianos y grandes operan PTAR domésticas que reciben aguas residenciales (servicios sanitarios, lavandería, cocina, áreas comunes) con cargas variables según ocupación, fines de semana y temporada; son operadas por administraciones que rara vez tienen personal técnico dedicado, lo que se traduce en olores, lodos acumulados, quejas vecinales y reportes mensuales irregulares al MARN.\n\nSegundo, los parques industriales mixtos albergan tenants de rubros distintos cuya descarga al PTAR común es heterogénea (oficinas, bodegas, maquilas livianas, centros de distribución, talleres) y la operación de la PTAR comunal sufre por la imprevisibilidad de la mezcla. Tercero, la industria textil guatemalteca, agrupada en VESTEX (Comisión de Vestuario y Textiles de Agexport), enfrenta un efluente especialmente complejo por la presencia de colorantes, surfactantes, alta alcalinidad y temperatura elevada.\n\nA nivel técnico, las aguas residuales de estos tres segmentos tienen perfiles distintos. Las PTAR de condominios manejan agua doméstica con DBO5 típica entre 200 y 400 mg/L, DQO entre 400 y 800 mg/L, alta biodegradabilidad y carga relativamente estable. Las PTAR de parques industriales mixtos manejan una mezcla difícil de caracterizar a priori: domésticos del personal + procesos ligeros de los tenants, con caudales y picos variables. La industria textil presenta un perfil más demandante: un caso documentado de planta textil en Guatemala reportó 1,088 m³/día de efluente con DBO5 de 250 mg/L, DQO de 1,000 mg/L, sólidos suspendidos de 110 mg/L, pH de 10, 4,312 unidades Pt-Co de color y temperatura de 44°C (Repositorio UVG); sus aguas son generalmente deficientes en nutrientes (N y P), con alta salinidad, presencia de tintes biodegradables y refractarios, surfactantes y trazas de metales pesados (Sigmadaf, 2023).\n\nEn la práctica convencional, estas PTAR combinan tanque de igualación, tratamiento físico-químico con coagulantes (sulfato de aluminio, cloruro férrico, policloruro de aluminio) y floculantes (poliacrilamida) cuando la carga lo justifica, tratamiento biológico aerobio (lodos activados, aeración extendida, biodiscos, MBBR) y en casos de textil cumplimiento avanzado se usa MBR o tratamientos terciarios. El uso intensivo de coagulantes y floculantes químicos introduce iones metálicos al efluente, incrementa la conductividad, dificulta procesos biológicos posteriores y genera lodo químico con costo de disposición creciente (Adintus, 2025). Simbiótica se posiciona como un coadyuvante biológico que actúa en la etapa secundaria del tren de tratamiento para fortalecer la población bacteriana nativa, mejorar la remoción de DBO/DQO biodegradable y apoyar la degradación de surfactantes, sin sustituir la PTAR ni eliminar el uso de coagulantes/floculantes cuando estos sean técnicamente necesarios (especialmente en textil, donde los tintes refractarios requieren tratamiento físico-químico o terciario).\n\nEn Guatemala, el AG 236-2006 continúa siendo la referencia técnica vigente para descargas, reúso de aguas residuales y disposición de lodos, con las reformas y prórrogas introducidas por el AG 129-2015 y el AG 285-2022. Por ello, Simbiótica no se plantea como una garantía de cumplimiento normativo ni como sustituto de la PTAR, sino como un coadyuvante microbiológico medible para apoyar la estabilidad biológica, la degradación de carga orgánica biodegradable y el control operativo de olores y lodos en PTAR existentes de condominios, parques industriales mixtos y textileras.',
+          alcancePreliminar: 'Se propone como un paquete técnico, no solo como producto en polvo. Incluye: (1) Producto microbiológico en polvo basado en consorcios de Bacillus; (2) Diagnóstico inicial de elegibilidad, para verificar si la PTAR tiene condiciones mínimas (oxigenación, pH, tiempos de retención, ausencia de tóxicos inhibidores) para aplicar el producto; (3) Protocolo de aplicación, con dosis preliminar de choque y mantenimiento a validar en piloto; (4) Reporte técnico del piloto, con resultados, límites de uso y recomendación para continuidad (Antes/Después); (5) Capacitación básica al operador, enfocada en manipulación, hidratación, aplicación y registro del producto en polvo; (6) Bitácora operativa, para documentar dosis, frecuencia, condiciones de la planta y observaciones.',
+          loQueBusca: 'Simbiótica busca apoyar la estabilidad biológica de PTAR existentes en tres segmentos: condominios, parques industriales mixtos e industria textil. Contribuir a la degradación de carga orgánica biodegradable medible en términos de DBO5 y la porción biodegradable de la DQO, apoyar la digestión de surfactantes y residuos de limpieza, y evaluar mediante piloto su efecto sobre la generación de lodos y el control de olores asociados a procesos anaerobios indeseados (sulfuro de hidrógeno, ácidos orgánicos volátiles). En textil, contribuye específicamente a la etapa biológica del tren, no a la remoción de color ni de tintes refractarios.',
+          loQueValida: 'La magnitud de la reducción de DBO5, DQO biodegradable, SST y de la mejora en parámetros operativos debe tratarse como hipótesis técnica del piloto, no como garantía comercial inicial. La eficacia depende fuertemente del segmento (condominio vs. parque mixto vs. textil), de la composición real del efluente, del diseño y operación de la PTAR existente, del tiempo de retención hidráulico, de la concentración de oxígeno disuelto, del pH, de la presencia de tóxicos y del punto de aplicación. La literatura reporta reducciones de DBO5 superiores al 95% en condiciones de laboratorio y piloto con consorcios de Bacillus aplicados a aguas industriales (Springer Nature, 2020; Frontiers, 2023), pero esos números no son extrapolables sin un piloto en sitio. En el caso específico de textil, la remoción biológica eficaz aplica a la fracción biodegradable; los tintes refractarios requieren otro tipo de tratamiento (físico-químico, electrocoagulación, ozono, membranas) que Simbiótica no sustituye.',
+          loQueNoPromete: 'Simbiótica no promete cumplimiento normativo automático ni sustituye la PTAR, ni elimina el uso de coagulantes/floculantes cuando estos sean técnicamente necesarios (especialmente en textil). No remueve color ni tintes refractarios.'
+        },
+        {
+          id: 'respiro',
+          category: 'municipales',
+          fase: 'II',
+          name: 'Respiro',
+          subtitle: 'Solución microbiológica en polvo para control de olores en PTAR',
+          description: 'Respiro es una solución biotecnológica dirigida inicialmente a plantas de tratamiento de aguas residuales municipales (PTAR), lagunas de oxidación, drenajes y sistemas de saneamiento urbano con problemas de malos olores. Su función es reducir el olor desde su origen mediante microorganismos benéficos que ayudan a acelerar la degradación de materia orgánica y a disminuir compuestos asociados al mal olor, como sulfuro de hidrógeno H₂S, amonio, metano y nitritos. A diferencia de un aromatizante o neutralizador superficial, Respiro no busca "tapar" el olor, sino mejorar las condiciones biológicas del sistema para reducir la generación de gases ofensivos.',
+          format: 'Polvo, 1 kg',
+          benefits: ['Reduce H₂S y gases de mal olor', 'Degrada materia orgánica acumulada', 'Compatible con lagunas de oxidación y drenajes municipales'],
+          productImage: '',
+          logoImage: '',
+          order: 3,
+          justificacion: 'La idea de Respiro surge a partir de la comparación entre dos realidades observadas en campo. En una PTAR municipal del área de Santa Catarina Pinula, el mal olor era perceptible desde varias cuadras antes de llegar y afectaba directamente a la población cercana. Esto evidenció que el problema de olores no es solamente técnico, sino también social, ambiental y de imagen municipal. En contraste, la visita a la PTAR de Cayalá mostró que una planta bien gestionada, con adecuada oxigenación y apoyo biológico, puede operar sin olores ofensivos. Esta comparación permitió validar la oportunidad de Respiro como una solución enfocada en reducir malos olores desde su causa y mejorar la convivencia urbana alrededor de sistemas de tratamiento.\n\nEstadísticas e insights que refuerzan el concepto:\n\n1. Guatemala ya reconoce el olor como problema ambiental. La Iniciativa 6680 propone una "Ley para la Gestión de la Contaminación por Olores".\n\n2. El MARN ya permite denunciar malos olores. En SICODA, la categoría "Aire" incluye "Malos Olores, Gases, Humo, Polvo, Partículas".\n\n3. San Miguel Petapa evidencia el problema social: más de 800 vecinos de Los Álamos conviven con aguas negras, malos olores, zancudos y contaminación, lo que demuestra que el problema de las aguas residuales afecta directamente la calidad de vida de las comunidades cercanas (Prensa Libre, 2026).\n\n4. Caso Villa Canales, aldea Chichimecas: alrededor de 6,000 pobladores han sido afectados por malos olores y aguas residuales, evidenciando cómo una falla en drenajes o tratamiento puede convertirse en un problema social para comunidades completas (Nuestro Diario, 2026).',
+          loQueBusca: 'Respiro busca ayudar a las municipalidades a reducir malos olores generados en PTAR, lagunas de oxidación, drenajes o puntos críticos de saneamiento urbano. Su propósito es mejorar la operación biológica del sistema, reducir quejas vecinales, disminuir presión social sobre la municipalidad y recuperar la confianza ciudadana en la gestión ambiental local. En términos prácticos, Respiro busca convertir un problema invisible para muchos decisores, pero evidente para los vecinos, en una oportunidad de mejora técnica y reputacional para la municipalidad.',
+          loQueValida: 'La reducción de olores, H₂S, amonio, nitritos, metano, carga orgánica o lodos debe tratarse como una hipótesis técnica del piloto, no como una promesa comercial absoluta. Los resultados dependerán del tipo de sistema, caudal, carga orgánica, oxigenación, tiempo de retención, punto de aplicación, frecuencia de dosificación, operación de la planta y condiciones reales del agua residual.\n\nPor eso, Respiro debe validarse mediante pilotos con medición antes/después, idealmente incluyendo percepción de olor, observaciones operativas y, cuando sea posible, parámetros técnicos como H₂S, DBO, DQO, amonio, sólidos o lodos.',
+          loQueNoPromete: 'Respiro no debe prometer eliminación total de olores, cumplimiento normativo automático, remoción total de contaminantes, desinfección, eliminación de patógenos, acción bactericida ni sustitución de una PTAR bien diseñada y operada. Tampoco debe presentarse como solución única para plantas colapsadas, sin oxigenación, sin mantenimiento o con fallas estructurales graves. En esos casos, Respiro puede ser un apoyo biológico, pero no reemplaza la operación, mantenimiento, aireación, limpieza, monitoreo ni correcciones técnicas del sistema.'
         }
       ],
       categories: [
-        { id: 'greendrain', name: 'Green Drain', description: 'Soluciones para el hogar y tuberías', icon: 'fa-house-chimney', order: 1 },
-        { id: 'agroflow', name: 'Agroflow', description: 'Soluciones para agricultura y drenaje', icon: 'fa-seedling', order: 2 },
-        { id: 'waterbridge', name: 'Waterbridge', description: 'Soluciones para puentes hídricos', icon: 'fa-bridge-water', order: 3 },
-        { id: 'hospitalwatershield', name: 'Hospital WaterShield', description: 'Tratamiento de aguas residuales hospitalarias', icon: 'fa-hospital', order: 4 }
+        { id: 'greendrain', name: 'Green Drain', description: 'Soluciones para el hogar y tuberías', icon: 'fa-house-chimney', order: 1, fase: 'I' },
+        { id: 'agroflow', name: 'Agroflow', description: 'Soluciones para agricultura y drenaje', icon: 'fa-seedling', order: 2, fase: 'I' },
+        { id: 'waterbridge', name: 'Waterbridge', description: 'Soluciones para puentes hídricos', icon: 'fa-bridge-water', order: 3, fase: 'I' },
+        { id: 'hospitalwatershield', name: 'Hospital WaterShield', description: 'Tratamiento de aguas residuales hospitalarias', icon: 'fa-hospital', order: 4, fase: 'I' },
+        { id: 'hospitalarias', name: 'Plantas de Tratamiento Hospitalarias', description: 'Soluciones microbiológicas para PTAR de hospitales y centros de salud.', icon: 'fa-hospital-user', order: 1, fase: 'II' },
+        { id: 'industriales', name: 'Plantas de Tratamiento Industriales', description: 'Soluciones para condominios, parques industriales mixtos e industria textil.', icon: 'fa-industry', order: 2, fase: 'II' },
+        { id: 'municipales', name: 'Plantas de Tratamiento Municipales', description: 'Control biológico de olores en PTAR municipales, lagunas y drenajes.', icon: 'fa-city', order: 3, fase: 'II' }
       ]
     };
     fs.writeFileSync(DB_PATH, JSON.stringify(initial, null, 2));
@@ -343,8 +422,28 @@ app.get('/admin/content', requireAuth, (req, res) => {
 
 app.post('/admin/content', requireAuth, (req, res) => {
   const db = loadDB();
-  const fields = ['heroTitle', 'heroSubtitle', 'heroDescription', 'heroTagline', 'aboutTitle', 'aboutText', 'footerText', 'whatsappNumber', 'contactEmail'];
+  const fields = [
+    'heroTitle', 'heroSubtitle', 'heroDescription', 'heroTagline',
+    'aboutTitle', 'aboutText', 'footerText', 'whatsappNumber', 'contactEmail',
+    'faseIITitle', 'faseIIIntro', 'faseITitle', 'faseISubtitle',
+    'conceptosTitle', 'conceptosIntro'
+  ];
   fields.forEach(f => { if (req.body[f] !== undefined) db.siteContent[f] = req.body[f]; });
+
+  // Conceptos de negocio (5 bloques: mercado, oferta, distribucion, produccion, modelo)
+  if (!db.siteContent.conceptos) db.siteContent.conceptos = {};
+  ['mercado', 'oferta', 'distribucion', 'produccion', 'modelo'].forEach(key => {
+    const titulo = req.body[`concepto_${key}_titulo`];
+    const icon = req.body[`concepto_${key}_icon`];
+    const texto = req.body[`concepto_${key}_texto`];
+    if (titulo !== undefined || icon !== undefined || texto !== undefined) {
+      db.siteContent.conceptos[key] = db.siteContent.conceptos[key] || {};
+      if (titulo !== undefined) db.siteContent.conceptos[key].titulo = titulo;
+      if (icon !== undefined) db.siteContent.conceptos[key].icon = icon;
+      if (texto !== undefined) db.siteContent.conceptos[key].texto = texto;
+    }
+  });
+
   saveDB(db);
   flash(req, 'success', 'Contenido actualizado correctamente');
   res.redirect('/admin/content');
@@ -377,6 +476,12 @@ app.post('/admin/products/edit/:id', requireAuth, upload.fields([
   db.products[idx].format = req.body.format || db.products[idx].format;
   db.products[idx].category = req.body.category || db.products[idx].category;
   db.products[idx].order = parseInt(req.body.order) || db.products[idx].order;
+  if (req.body.fase === 'I' || req.body.fase === 'II') db.products[idx].fase = req.body.fase;
+
+  // Bloques largos opcionales (Fase II). Se aceptan cadenas vacías para limpiarlos.
+  ['justificacion', 'alcancePreliminar', 'loQueBusca', 'loQueValida', 'loQueNoPromete'].forEach(k => {
+    if (req.body[k] !== undefined) db.products[idx][k] = req.body[k];
+  });
 
   if (req.body.benefits) {
     db.products[idx].benefits = req.body.benefits.split('\n').map(b => b.trim()).filter(b => b);
@@ -395,7 +500,7 @@ app.post('/admin/products/edit/:id', requireAuth, upload.fields([
 
 app.get('/admin/products/new', requireAuth, (req, res) => {
   res.render('admin/product-edit', {
-    product: { id: '', name: '', subtitle: '', description: '', format: '', benefits: [], productImage: '', logoImage: '', category: 'greendrain', order: 99 },
+    product: { id: '', name: '', subtitle: '', description: '', format: '', benefits: [], productImage: '', logoImage: '', category: 'greendrain', order: 99, fase: 'I', justificacion: '', alcancePreliminar: '', loQueBusca: '', loQueValida: '', loQueNoPromete: '' },
     categories: loadDB().categories,
     user: req.session.user, flash: res.locals.flash
   });
@@ -413,10 +518,16 @@ app.post('/admin/products/new', requireAuth, upload.fields([
     description: req.body.description || '',
     format: req.body.format || '',
     category: req.body.category || 'greendrain',
+    fase: (req.body.fase === 'II' ? 'II' : 'I'),
     order: parseInt(req.body.order) || 99,
     benefits: req.body.benefits ? req.body.benefits.split('\n').map(b => b.trim()).filter(b => b) : [],
     productImage: req.files && req.files.productImage ? '/uploads/' + req.files.productImage[0].filename : '',
-    logoImage: req.files && req.files.logoImage ? '/uploads/' + req.files.logoImage[0].filename : ''
+    logoImage: req.files && req.files.logoImage ? '/uploads/' + req.files.logoImage[0].filename : '',
+    justificacion: req.body.justificacion || '',
+    alcancePreliminar: req.body.alcancePreliminar || '',
+    loQueBusca: req.body.loQueBusca || '',
+    loQueValida: req.body.loQueValida || '',
+    loQueNoPromete: req.body.loQueNoPromete || ''
   };
   db.products.push(newProduct);
   saveDB(db);
@@ -446,9 +557,43 @@ app.post('/admin/categories/edit/:id', requireAuth, (req, res) => {
     cat.description = req.body.description || cat.description;
     cat.icon = req.body.icon || cat.icon;
     cat.order = parseInt(req.body.order) || cat.order;
+    if (req.body.fase === 'I' || req.body.fase === 'II') cat.fase = req.body.fase;
     saveDB(db);
   }
   flash(req, 'success', 'Categoría actualizada');
+  res.redirect('/admin/categories');
+});
+
+app.post('/admin/categories/new', requireAuth, requireAdmin, (req, res) => {
+  const db = loadDB();
+  const { name, description, icon, order, fase } = req.body;
+  if (!name) { flash(req, 'error', 'El nombre es obligatorio'); return res.redirect('/admin/categories'); }
+  const id = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (!id) { flash(req, 'error', 'Nombre inválido'); return res.redirect('/admin/categories'); }
+  if (db.categories.find(c => c.id === id)) { flash(req, 'error', 'Ya existe una categoría con ese nombre'); return res.redirect('/admin/categories'); }
+  db.categories.push({
+    id,
+    name,
+    description: description || '',
+    icon: icon || 'fa-leaf',
+    order: parseInt(order) || (db.categories.length + 1),
+    fase: (fase === 'II' ? 'II' : 'I')
+  });
+  saveDB(db);
+  flash(req, 'success', 'Categoría creada');
+  res.redirect('/admin/categories');
+});
+
+app.post('/admin/categories/delete/:id', requireAuth, requireAdmin, (req, res) => {
+  const db = loadDB();
+  const used = db.products.some(p => p.category === req.params.id);
+  if (used) {
+    flash(req, 'error', 'No se puede eliminar: hay productos asignados a esta categoría');
+    return res.redirect('/admin/categories');
+  }
+  db.categories = db.categories.filter(c => c.id !== req.params.id);
+  saveDB(db);
+  flash(req, 'success', 'Categoría eliminada');
   res.redirect('/admin/categories');
 });
 
