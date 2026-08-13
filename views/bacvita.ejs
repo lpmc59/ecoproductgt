@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BacVita | Solución microbiológica para PTAR hospitalarias</title>
   <meta name="description" content="BacVita es una solución microbiológica en polvo desarrollada para reforzar la actividad biológica y apoyar la estabilidad operativa de PTAR hospitalarias.">
+  <link rel="canonical" href="https://ecoproductgt.com/bacvita">
 
-  <!-- Open Graph básico -->
   <meta property="og:title" content="BacVita | Solución microbiológica para PTAR hospitalarias">
-  <meta property="og:description" content="Formulación microbiológica con consorcios de Bacillus para reforzar la actividad biológica de PTAR hospitalarias.">
+  <meta property="og:description" content="Consorcios microbiológicos y metodología de aplicación que se adapta a las condiciones reales de cada PTAR.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ecoproductgt.com/bacvita">
-  <meta property="og:image" content="https://ecoproductgt.com/assets/bacvita/bacvita-product-pair.jpg">
+  <meta property="og:image" content="https://ecoproductgt.com/assets/bacvita/bacvita-bottle-front.jpg">
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,337 +21,32 @@
 </head>
 <body class="bv-page">
 
-<!-- =============== HEADER =============== -->
-<header class="bv-header" role="banner">
-  <div class="bv-container bv-header__inner">
-    <a href="/bacvita" class="bv-brand" aria-label="BacVita — inicio">
-      <span class="bv-brand__mark">Bac<span>Vita</span></span>
-      <span class="bv-brand__divider" aria-hidden="true"></span>
-      <span class="bv-brand__tag">Soluciones Biológicas</span>
-    </a>
+  <%- include('partials/bacvita/header') %>
 
-    <nav id="bv-nav" class="bv-nav" aria-label="Navegación principal">
-      <a class="bv-nav__link" href="#solucion">Solución</a>
-      <a class="bv-nav__link" href="#proceso">Cómo funciona</a>
-      <a class="bv-nav__link" href="#validacion">Resultados</a>
-      <a class="bv-nav__link" href="#sectores">Sectores</a>
-      <a class="bv-btn bv-btn--primary" href="#contacto">Solicita un diagnóstico</a>
-    </nav>
+  <main id="main">
+    <%- include('partials/bacvita/hero') %>
+    <%- include('partials/bacvita/problems') %>
+    <%- include('partials/bacvita/solution') %>
+    <%- include('partials/bacvita/process') %>
+    <%- include('partials/bacvita/results') %>
+    <%- include('partials/bacvita/sectors') %>
+    <%- include('partials/bacvita/contact') %>
+  </main>
 
-    <button class="bv-nav-toggle" type="button" aria-label="Abrir menú" aria-controls="bv-nav" aria-expanded="false" onclick="(function(b){var n=document.getElementById('bv-nav');var open=n.classList.toggle('bv-nav--open');b.setAttribute('aria-expanded',open);b.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');})(this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-    </button>
-  </div>
-</header>
+  <%- include('partials/bacvita/footer') %>
 
-<main id="main">
-
-  <!-- =============== HERO =============== -->
-  <section class="bv-hero" id="inicio" aria-labelledby="bv-hero-title">
-    <div class="bv-container bv-hero__grid">
-      <div>
-        <p class="bv-eyebrow">Microbiología aplicada</p>
-        <h1 class="bv-hero__title" id="bv-hero-title">
-          Tu PTAR puede funcionar mejor.<br>
-          Nosotros te ayudamos a lograrlo.
-        </h1>
-        <p class="bv-hero__desc">
-          BacVita es una formulación microbiológica en polvo basada en consorcios de <em>Bacillus</em>,
-          desarrollada para reforzar la actividad biológica de PTAR hospitalarias
-          y apoyar la estabilidad operativa del sistema, bajo protocolo técnico.
-        </p>
-
-        <div class="bv-mini" role="list">
-          <div class="bv-mini__item" role="listitem">
-            <svg class="bv-mini__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/><path d="M2 14c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/></svg>
-            <span class="bv-mini__label">Mejor calidad<br>del efluente</span>
-          </div>
-          <div class="bv-mini__item" role="listitem">
-            <svg class="bv-mini__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 8v5l3 2"/><path d="M9 3h6"/></svg>
-            <span class="bv-mini__label">Operación<br>más estable</span>
-          </div>
-          <div class="bv-mini__item" role="listitem">
-            <svg class="bv-mini__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 3s7 5 7 11a7 7 0 1 1-14 0c0-6 7-11 7-11z"/></svg>
-            <span class="bv-mini__label">Menor consumo<br>de químicos auxiliares</span>
-          </div>
-        </div>
-
-        <a href="#contacto" class="bv-cta-arrow" aria-label="Solicita un diagnóstico">
-          <span class="bv-cta-arrow__btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-          <span class="bv-cta-arrow__text">Un diagnóstico técnico, claro y adaptado a tu operación.</span>
-        </a>
-      </div>
-
-      <div class="bv-hero__visual" aria-hidden="false">
-        <div class="bv-hero__product" role="img" aria-label="Envase BacVita — Solución microbiológica para PTAR (500 g)"></div>
-        <div class="bv-hero__card">
-          <div class="bv-hero__card-title">Biotecnología que fortalece tu operación</div>
-          <div class="bv-hero__card-item">Soporte técnico especializado</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =============== PROBLEMA / CONTEXTO =============== -->
-  <section class="bv-problem" id="problema" aria-labelledby="bv-problem-title">
-    <div class="bv-container bv-problem__grid">
-      <div class="bv-problem__intro">
-        <p class="bv-eyebrow">El contexto</p>
-        <h2 id="bv-problem-title">Las aguas hospitalarias no son un agua residual común.</h2>
-        <p>
-          Incorporan descargas de cocina, lavandería, baños, laboratorios, quirófanos y áreas
-          de limpieza — una corriente más compleja que un agua residual doméstica convencional.
-        </p>
-      </div>
-      <ul class="bv-problem__chips" aria-label="Componentes típicos del efluente hospitalario">
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Carga orgánica</li>
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Grasas</li>
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Sólidos</li>
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Nutrientes</li>
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Desinfectantes</li>
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Residuos farmacéuticos</li>
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Antimicrobianos</li>
-        <li class="bv-chip"><span class="bv-chip__dot"></span>Otros compuestos residuales</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- =============== SOLUCIÓN =============== -->
-  <section class="bv-solution" id="solucion" aria-labelledby="bv-solution-title">
-    <div class="bv-container">
-      <div class="bv-solution__head">
-        <p class="bv-eyebrow">La solución</p>
-        <h2 id="bv-solution-title">
-          BacVita: formulación microbiológica en polvo para PTAR hospitalarias existentes.
-        </h2>
-        <p>
-          Consorcios de <em>Bacillus</em> seleccionados para reforzar la actividad biológica del sistema,
-          apoyar la degradación de carga orgánica y contribuir al manejo de compuestos residuales complejos —
-          bajo un protocolo técnico de aplicación.
-        </p>
-      </div>
-      <div class="bv-solution__grid">
-        <article class="bv-solution__card">
-          <span class="bv-solution__card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 0-5 5v4a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/><path d="M4 21h16"/><path d="M9 21v-4"/><path d="M15 21v-4"/></svg>
-          </span>
-          <h4>Fortalecer actividad biológica</h4>
-          <p>Refuerza la actividad microbiológica del sistema de tratamiento existente.</p>
-        </article>
-        <article class="bv-solution__card">
-          <span class="bv-solution__card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>
-          </span>
-          <h4>Apoyar degradación de carga orgánica</h4>
-          <p>Contribuye al trabajo biológico de la PTAR frente a corrientes de composición más compleja.</p>
-        </article>
-        <article class="bv-solution__card">
-          <span class="bv-solution__card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M8 4l4 4 4-4"/><rect x="4" y="10" width="16" height="10" rx="2"/></svg>
-          </span>
-          <h4>Ayudar al sistema frente a corrientes complejas</h4>
-          <p>Forma parte de una estrategia biológica para enfrentar trazas farmacéuticas, antimicrobianos, detergentes y desinfectantes en efluentes hospitalarios.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- =============== BENEFICIOS =============== -->
-  <section class="bv-benefits" id="beneficios" aria-label="Beneficios principales">
-    <div class="bv-container">
-      <div class="bv-benefits__row">
-        <div class="bv-benefits__item">
-          <span class="bv-benefits__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="3"/></svg>
-          </span>
-          <span class="bv-benefits__label">Refuerza la actividad biológica</span>
-        </div>
-        <div class="bv-benefits__item">
-          <span class="bv-benefits__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z"/><circle cx="12" cy="12" r="2.5"/></svg>
-          </span>
-          <span class="bv-benefits__label">Apoya la degradación de carga orgánica compleja</span>
-        </div>
-        <div class="bv-benefits__item">
-          <span class="bv-benefits__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5c0 4-5 8-5 8s-5-4-5-8a5 5 0 0 1 5-5z"/><circle cx="12" cy="7" r="1.5"/></svg>
-          </span>
-          <span class="bv-benefits__label">Apoya el manejo de trazas farmacéuticas y desinfectantes</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =============== PROCESO / TRES PASOS =============== -->
-  <section class="bv-process" id="proceso" aria-labelledby="bv-process-title">
-    <div class="bv-container">
-      <div class="bv-process__head">
-        <p class="bv-eyebrow">Modelo de servicio</p>
-        <h2 id="bv-process-title">Diagnóstico → Piloto → Mantenimiento</h2>
-        <p>Un proceso ordenado, transparente y adaptado a la operación real de tu PTAR.</p>
-      </div>
-      <div class="bv-process__steps">
-        <article class="bv-step">
-          <div class="bv-step__num">01 — Diagnóstico</div>
-          <h4>Primero entendemos la planta.</h4>
-          <p>Evaluación inicial del agua de entrada, condiciones de operación, pH, aireación, carga orgánica, presencia de químicos y punto de aplicación.</p>
-          <span class="bv-step__tag">Sin compromiso de compra</span>
-        </article>
-        <article class="bv-step">
-          <div class="bv-step__num">02 — Piloto pagado</div>
-          <h4>Probamos antes de escalar.</h4>
-          <p>Implementación de BacVita en condiciones reales, con comparación antes/después de parámetros previamente seleccionados.</p>
-          <span class="bv-step__tag">Validación técnica en sitio</span>
-        </article>
-        <article class="bv-step">
-          <div class="bv-step__num">03 — Mantenimiento mensual</div>
-          <h4>Acompañamiento continuo, no solamente producto.</h4>
-          <p>Producto, protocolo de aplicación, seguimiento, bitácora, capacitación al operador y ajustes cuando sean necesarios.</p>
-          <span class="bv-step__tag">Esquema recurrente</span>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- =============== VALIDACIÓN / PILOTO =============== -->
-  <section class="bv-validation" id="validacion" aria-labelledby="bv-validation-title">
-    <div class="bv-container bv-validation__grid">
-      <div class="bv-validation__intro">
-        <p class="bv-eyebrow">Lo que queda sujeto a validación</p>
-        <h2 id="bv-validation-title">Las bacterias no funcionan igual en cualquier corriente.</h2>
-        <p>
-          El desempeño de BacVita depende de las condiciones del sistema.
-          El piloto no busca hacer pruebas indefinidas — busca comprobar que existen condiciones suficientes
-          para que BacVita pueda aportar valor en tu planta específica.
-        </p>
-        <p class="bv-validation__msg">
-          Nuestro compromiso es demostrar el impacto en tu PTAR antes de recomendar un uso recurrente.
-        </p>
-      </div>
-      <ul class="bv-validation__list" aria-label="Variables consideradas en el piloto">
-        <li>Características del agua de entrada</li>
-        <li>Operación de la planta</li>
-        <li>pH</li>
-        <li>Aireación</li>
-        <li>Carga orgánica</li>
-        <li>Presencia de químicos y desinfectantes</li>
-        <li>Punto de aplicación</li>
-        <li>Dosis</li>
-        <li>Evolución de parámetros antes y después</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- =============== TRANSPARENCIA / LO QUE NO PROMETE =============== -->
-  <section class="bv-transparency" id="transparencia" aria-labelledby="bv-transparency-title">
-    <div class="bv-container">
-      <div class="bv-transparency__head">
-        <p class="bv-eyebrow">Transparencia técnica</p>
-        <h2 id="bv-transparency-title">Lo que BacVita no promete</h2>
-        <p>Preferimos ser claros sobre lo que hacemos y lo que no. Es parte del trabajo bien hecho.</p>
-      </div>
-      <div class="bv-transparency__grid">
-        <div class="bv-transparency__item">Eliminación total de antibióticos</div>
-        <div class="bv-transparency__item">Remoción completa de fármacos</div>
-        <div class="bv-transparency__item">Desinfección del agua</div>
-        <div class="bv-transparency__item">Eliminación garantizada de patógenos</div>
-        <div class="bv-transparency__item">Reducción garantizada de resistencia antimicrobiana</div>
-        <div class="bv-transparency__item">Cumplimiento normativo automático</div>
-        <div class="bv-transparency__item">Corregir una PTAR mal diseñada</div>
-        <div class="bv-transparency__item">Sustituir una aireación deficiente</div>
-        <div class="bv-transparency__item">Sustituir mantenimiento u operación adecuada</div>
-      </div>
-      <p class="bv-transparency__note">
-        El desempeño depende de composición del efluente, condiciones de la PTAR, punto de aplicación,
-        dosis, operación y seguimiento técnico.
-      </p>
-    </div>
-  </section>
-
-  <!-- =============== SECTORES =============== -->
-  <section class="bv-sectors" id="sectores" aria-labelledby="bv-sectors-title">
-    <div class="bv-container">
-      <div class="bv-sectors__head">
-        <h3 id="bv-sectors-title">Para quién es BacVita</h3>
-        <p>Plantas de tratamiento con corrientes complejas donde la operación biológica necesita apoyo.</p>
-      </div>
-      <div class="bv-sectors__row">
-        <div class="bv-sector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21v-6h6v6"/><path d="M11 10h2M12 9v2"/></svg>
-          <span>Hospitales y clínicas</span>
-        </div>
-        <div class="bv-sector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V10l6-4v4l6-4v15z"/><path d="M9 21v-4M15 21v-4"/></svg>
-          <span>Centros de salud</span>
-        </div>
-        <div class="bv-sector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16M6 21V9l6-4 6 4v12"/><path d="M9 12h6M9 16h6"/></svg>
-          <span>Institutos y laboratorios</span>
-        </div>
-        <div class="bv-sector">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12s4-7 9-7 9 7 9 7-4 7-9 7-9-7-9-7z"/><circle cx="12" cy="12" r="3"/></svg>
-          <span>Operadores de PTAR</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =============== CTA FINAL / CONTACTO =============== -->
-  <section class="bv-cta" id="contacto" aria-labelledby="bv-cta-title">
-    <div class="bv-container">
-      <div class="bv-cta__inner">
-        <div>
-          <h2 class="bv-cta__title" id="bv-cta-title">
-            Empecemos con un diagnóstico técnico de tu PTAR.
-          </h2>
-          <p class="bv-cta__desc">
-            Sin compromiso de compra. Evaluamos si BacVita puede aportar valor en tu planta específica
-            y te compartimos las siguientes recomendaciones.
-          </p>
-        </div>
-        <div class="bv-cta__actions">
-          <a class="bv-btn bv-btn--primary" href="mailto:info@ecoproductgt.com?subject=Diagnóstico%20BacVita">
-            Solicita un diagnóstico
-          </a>
-          <a class="bv-btn bv-cta__btn-wa" href="#" aria-label="Escríbenos por WhatsApp (enlace a configurar)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.7 11.7 0 0 0 12.1 0C5.5 0 .3 5.3.3 11.8c0 2.1.5 4.1 1.6 5.9L.2 24l6.5-1.7a11.8 11.8 0 0 0 5.4 1.4c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.4zM12.1 21.6c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.9 1 1-3.8-.2-.4a9.7 9.7 0 0 1-1.5-5.1c0-5.4 4.4-9.7 9.7-9.7 2.6 0 5 1 6.9 2.9a9.7 9.7 0 0 1 2.9 6.9c0 5.3-4.4 9.7-9.8 9.7zm5.3-7.3c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1c-.2.3-.8 1-1 1.2-.2.2-.4.3-.7.1a7.9 7.9 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.6-1-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.3-.3.2-1 1-1 2.5s1.1 2.8 1.2 3c.1.2 2.2 3.3 5.3 4.7l1.7.7c.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.3z"/></svg>
-            Escríbenos
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- =============== FOOTER =============== -->
-<footer class="bv-footer" role="contentinfo">
-  <div class="bv-container bv-footer__inner">
-    <div class="bv-footer__brand">
-      <strong>BacVita</strong> · by <strong>SUCCESSO</strong> · Control vivo para sistemas críticos.
-    </div>
-    <div class="bv-footer__links">
-      <a href="#inicio">Inicio</a>
-      <a href="#solucion">Solución</a>
-      <a href="#proceso">Cómo funciona</a>
-      <a href="#contacto">Contacto</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Cierra el menú móvil al hacer click en un enlace interno
-  document.querySelectorAll('#bv-nav a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      var n = document.getElementById('bv-nav');
-      var btn = document.querySelector('.bv-nav-toggle');
-      if (n && n.classList.contains('bv-nav--open')) {
-        n.classList.remove('bv-nav--open');
-        if (btn) { btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Abrir menú'); }
-      }
+  <script>
+    // Cerrar menú mobile al hacer click en enlace interno
+    document.querySelectorAll('#bv-nav a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(){
+        var n = document.getElementById('bv-nav');
+        var btn = document.querySelector('.bv-nav-toggle');
+        if (n && n.classList.contains('bv-nav--open')) {
+          n.classList.remove('bv-nav--open');
+          if (btn) { btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Abrir menú'); }
+        }
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
