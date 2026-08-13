@@ -368,6 +368,12 @@ app.get('/', (req, res) => {
   res.render('index', { content: db.siteContent, products: db.products, categories: db.categories });
 });
 
+// Landing dedicada BacVita (Fase II - producto principal hospitalario)
+// Layout standalone (no usa partials/header ni partials/footer): fidelidad visual con la referencia.
+app.get('/bacvita', (req, res) => {
+  res.render('bacvita');
+});
+
 app.get('/categoria/:id', (req, res) => {
   const db = loadDB();
   const cat = db.categories.find(c => c.id === req.params.id);

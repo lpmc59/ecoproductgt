@@ -1,0 +1,581 @@
+/* ================================================================
+   BacVita landing — CSS
+   Colores y tokens extraídos de https://parrillaprime.my.canva.site/bacvita
+   Font base: DM Sans (Google Fonts).
+   ================================================================ */
+
+:root {
+  /* Colores primarios (extraídos de la referencia) */
+  --bv-navy:        #003c70;
+  --bv-navy-deep:  #10224c;
+  --bv-teal:        #008d96;
+  --bv-teal-dark:  #007780;
+  --bv-teal-soft:  #4b8e97;
+  --bv-aqua-light: #b1d0d8;
+
+  /* Fondos suaves */
+  --bv-white:       #ffffff;
+  --bv-off:         #f5fafb;
+  --bv-off-2:       #eff8f9;
+  --bv-border:      #d8edf0;
+  --bv-border-strong:#bcd7db;
+
+  /* Grises soporte */
+  --bv-slate-100:   #f1f5f9;
+  --bv-slate-500:   #64748b;
+  --bv-slate-600:   #475569;
+
+  /* Espaciado (referencia Canva ~ py-10..py-14) */
+  --bv-space-xs:  8px;
+  --bv-space-sm: 16px;
+  --bv-space-md: 24px;
+  --bv-space-lg: 40px;
+  --bv-space-xl: 64px;
+  --bv-space-2xl:96px;
+
+  /* Radios y sombras */
+  --bv-radius-sm: 8px;
+  --bv-radius-md: 12px;
+  --bv-radius-lg: 20px;
+  --bv-shadow-sm: 0 1px 2px rgba(3, 22, 51, 0.06);
+  --bv-shadow-md: 0 8px 24px -6px rgba(3, 22, 51, 0.12);
+  --bv-shadow-lg: 0 24px 48px -12px rgba(3, 22, 51, 0.18);
+
+  /* Transición base */
+  --bv-transition: 180ms ease;
+
+  /* Layout */
+  --bv-max: 1200px;
+}
+
+/* Reset localizado (no queremos afectar admin ni otras páginas) */
+.bv-page *,
+.bv-page *::before,
+.bv-page *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.bv-page {
+  font-family: 'DM Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--bv-navy);
+  background: var(--bv-white);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bv-page img { max-width: 100%; height: auto; display: block; }
+.bv-page a { color: inherit; text-decoration: none; }
+.bv-page button { font: inherit; cursor: pointer; border: 0; background: transparent; color: inherit; }
+.bv-page :focus-visible { outline: 2px solid var(--bv-teal); outline-offset: 2px; border-radius: 4px; }
+
+.bv-container { max-width: var(--bv-max); margin: 0 auto; padding: 0 24px; }
+
+/* ============================================================
+   HEADER (sticky, blur, borde inferior)
+   ============================================================ */
+.bv-header {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--bv-slate-100);
+}
+.bv-header__inner {
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px;
+}
+.bv-brand { display: flex; align-items: center; gap: 12px; }
+.bv-brand__mark {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--bv-navy);
+}
+.bv-brand__mark span { color: var(--bv-teal); }
+.bv-brand__divider {
+  width: 1px; height: 22px; background: var(--bv-border);
+}
+.bv-brand__tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--bv-slate-500);
+}
+
+.bv-nav { display: flex; align-items: center; gap: 26px; }
+.bv-nav__link {
+  font-size: 13px; font-weight: 600; color: var(--bv-navy);
+  transition: color var(--bv-transition);
+}
+.bv-nav__link:hover { color: var(--bv-teal); }
+
+.bv-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.01em;
+  padding: 12px 20px; border-radius: 999px;
+  transition: transform var(--bv-transition), background var(--bv-transition), box-shadow var(--bv-transition);
+}
+.bv-btn--primary {
+  background: var(--bv-teal); color: var(--bv-white);
+  box-shadow: var(--bv-shadow-sm);
+}
+.bv-btn--primary:hover {
+  background: var(--bv-teal-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--bv-shadow-md);
+}
+.bv-btn--ghost {
+  background: transparent; color: var(--bv-navy);
+  border: 1.5px solid var(--bv-border-strong);
+}
+.bv-btn--ghost:hover { border-color: var(--bv-teal); color: var(--bv-teal); }
+
+/* Hamburger para mobile */
+.bv-nav-toggle {
+  display: none;
+  width: 42px; height: 42px; border-radius: 10px;
+  color: var(--bv-navy);
+}
+.bv-nav-toggle svg { width: 22px; height: 22px; }
+
+/* ============================================================
+   HERO — split layout: texto izquierda / producto derecha + card
+   ============================================================ */
+.bv-hero {
+  padding: 48px 0 64px;
+  position: relative; overflow: hidden;
+}
+.bv-hero__grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+}
+.bv-eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--bv-teal);
+  margin-bottom: 18px;
+}
+.bv-hero__title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 700; line-height: 1.14; letter-spacing: -0.015em;
+  color: var(--bv-navy); margin-bottom: 20px;
+}
+.bv-hero__desc {
+  font-size: 16px; line-height: 1.7; color: var(--bv-slate-600);
+  max-width: 520px; margin-bottom: 28px;
+}
+
+/* Tres mini features del hero */
+.bv-mini {
+  display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 20px;
+  padding: 22px 0; border-top: 1px solid var(--bv-border); border-bottom: 1px solid var(--bv-border);
+  margin-bottom: 28px;
+}
+.bv-mini__item { display: flex; flex-direction: column; gap: 8px; }
+.bv-mini__icon {
+  width: 28px; height: 28px; color: var(--bv-teal); display: block;
+}
+.bv-mini__label {
+  font-size: 13px; font-weight: 600; color: var(--bv-navy); line-height: 1.35;
+}
+
+/* CTA circular con flecha */
+.bv-cta-arrow {
+  display: inline-flex; align-items: center; gap: 14px;
+}
+.bv-cta-arrow__btn {
+  width: 56px; height: 56px; border-radius: 999px;
+  background: var(--bv-navy); color: var(--bv-white);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform var(--bv-transition), background var(--bv-transition);
+  box-shadow: var(--bv-shadow-sm);
+}
+.bv-cta-arrow__btn svg { width: 22px; height: 22px; }
+.bv-cta-arrow__btn:hover { background: var(--bv-navy-deep); transform: translateX(2px); }
+.bv-cta-arrow__text {
+  font-size: 14px; color: var(--bv-slate-600); max-width: 260px; line-height: 1.5;
+}
+
+/* Producto (bottle) + card superpuesta */
+.bv-hero__visual {
+  position: relative;
+  border: 1px solid var(--bv-border);
+  border-radius: var(--bv-radius-lg);
+  background: linear-gradient(180deg, var(--bv-white) 0%, var(--bv-off) 100%);
+  min-height: 500px;
+  padding: 24px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+/* Decoración arc superior izquierdo */
+.bv-hero__visual::before {
+  content: ''; position: absolute; top: 32px; left: 32px;
+  width: 140px; height: 140px; border: 1.5px solid var(--bv-teal);
+  border-right-color: transparent; border-bottom-color: transparent;
+  border-radius: 50%; opacity: 0.35;
+}
+.bv-hero__product {
+  /* La imagen es un pair.jpg 1400x933 con 2 botellas. Mostramos solo la izquierda. */
+  width: 100%; max-width: 520px; aspect-ratio: 4 / 5;
+  background-image: url('/assets/bacvita/bacvita-product-pair.jpg');
+  background-size: 210% auto;
+  background-position: 18% center;
+  background-repeat: no-repeat;
+}
+
+/* Card superpuesta inferior derecha */
+.bv-hero__card {
+  position: absolute; right: 24px; bottom: 24px;
+  background: var(--bv-navy);
+  color: var(--bv-white);
+  border-radius: 14px; padding: 18px 20px;
+  max-width: 220px;
+  box-shadow: var(--bv-shadow-md);
+}
+.bv-hero__card-title {
+  font-size: 14px; font-weight: 700; line-height: 1.3; margin-bottom: 10px;
+}
+.bv-hero__card-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: rgba(255,255,255,0.85);
+}
+.bv-hero__card-item::before {
+  content: ''; width: 7px; height: 7px; border-radius: 999px;
+  background: var(--bv-teal); flex-shrink: 0;
+}
+
+/* ============================================================
+   PROBLEMA / CONTEXTO — banda clara con onda
+   ============================================================ */
+.bv-problem {
+  background: var(--bv-off);
+  border-top: 1px solid var(--bv-border);
+  border-bottom: 1px solid var(--bv-border);
+  padding: 56px 0;
+  position: relative;
+}
+.bv-problem__grid {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: center;
+}
+.bv-problem__intro { max-width: 380px; }
+.bv-problem h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700; line-height: 1.2; color: var(--bv-navy);
+  margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.bv-problem p {
+  font-size: 15px; line-height: 1.7; color: var(--bv-slate-600);
+}
+
+.bv-problem__chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.bv-chip {
+  background: var(--bv-white);
+  border: 1px solid var(--bv-border);
+  color: var(--bv-navy);
+  padding: 8px 14px; border-radius: 999px;
+  font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.bv-chip__dot {
+  width: 6px; height: 6px; border-radius: 999px; background: var(--bv-teal);
+}
+
+/* ============================================================
+   SOLUCIÓN — split texto + tres puntos
+   ============================================================ */
+.bv-solution { padding: 56px 0 44px; }
+.bv-solution__head {
+  max-width: 720px; margin-bottom: 40px;
+}
+.bv-solution__head .bv-eyebrow { margin-bottom: 14px; }
+.bv-solution__head h2 {
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 700; line-height: 1.2; letter-spacing: -0.01em;
+  color: var(--bv-navy);
+  margin-bottom: 16px;
+}
+.bv-solution__head p {
+  font-size: 16px; line-height: 1.7; color: var(--bv-slate-600);
+}
+.bv-solution__grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
+}
+.bv-solution__card {
+  background: var(--bv-white);
+  border: 1px solid var(--bv-border);
+  border-radius: var(--bv-radius-md);
+  padding: 22px 22px 24px;
+  transition: transform var(--bv-transition), box-shadow var(--bv-transition), border-color var(--bv-transition);
+}
+.bv-solution__card:hover {
+  transform: translateY(-3px); border-color: var(--bv-teal);
+  box-shadow: var(--bv-shadow-md);
+}
+.bv-solution__card-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--bv-off-2); color: var(--bv-teal);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.bv-solution__card-icon svg { width: 20px; height: 20px; }
+.bv-solution__card h4 {
+  font-size: 15px; font-weight: 700; color: var(--bv-navy); margin-bottom: 6px; line-height: 1.35;
+}
+.bv-solution__card p {
+  font-size: 13px; line-height: 1.6; color: var(--bv-slate-600);
+}
+
+/* ============================================================
+   BENEFICIOS (fila con 3 iconos + label)
+   ============================================================ */
+.bv-benefits {
+  background: var(--bv-off-2);
+  padding: 44px 0;
+  border-top: 1px solid var(--bv-border);
+  border-bottom: 1px solid var(--bv-border);
+}
+.bv-benefits__row {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+.bv-benefits__item {
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.bv-benefits__icon {
+  width: 44px; height: 44px; border-radius: 999px;
+  background: var(--bv-white); border: 1px solid var(--bv-border);
+  color: var(--bv-teal);
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.bv-benefits__icon svg { width: 22px; height: 22px; }
+.bv-benefits__label {
+  font-size: 14px; font-weight: 700; color: var(--bv-navy); line-height: 1.35;
+}
+
+/* ============================================================
+   PROCESO — 3 pasos (Diagnóstico → Piloto → Mantenimiento)
+   ============================================================ */
+.bv-process { padding: 56px 0; }
+.bv-process__head { text-align: center; margin-bottom: 44px; }
+.bv-process__head h2 {
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 700; color: var(--bv-navy);
+  margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.bv-process__head p {
+  font-size: 15px; color: var(--bv-slate-600); max-width: 640px; margin: 0 auto;
+}
+.bv-process__steps {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;
+  position: relative;
+}
+.bv-step {
+  border: 1px solid var(--bv-border);
+  border-radius: var(--bv-radius-md);
+  padding: 26px 22px 24px;
+  background: var(--bv-white);
+  transition: border-color var(--bv-transition), transform var(--bv-transition), box-shadow var(--bv-transition);
+}
+.bv-step:hover { border-color: var(--bv-teal); box-shadow: var(--bv-shadow-md); transform: translateY(-2px); }
+.bv-step__num {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--bv-teal); margin-bottom: 8px;
+}
+.bv-step h4 {
+  font-size: 18px; font-weight: 700; color: var(--bv-navy);
+  margin-bottom: 10px;
+}
+.bv-step p {
+  font-size: 14px; line-height: 1.65; color: var(--bv-slate-600);
+  margin-bottom: 12px;
+}
+.bv-step__tag {
+  display: inline-block; font-size: 12px; font-weight: 600;
+  color: var(--bv-teal); background: var(--bv-off-2);
+  padding: 6px 12px; border-radius: 999px;
+}
+
+/* ============================================================
+   VALIDACIÓN — lo que queda sujeto a validación
+   ============================================================ */
+.bv-validation {
+  background: var(--bv-off);
+  padding: 60px 0;
+  border-top: 1px solid var(--bv-border);
+}
+.bv-validation__grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px;
+}
+.bv-validation__intro h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700; color: var(--bv-navy);
+  margin-bottom: 14px; letter-spacing: -0.01em;
+}
+.bv-validation__intro p {
+  font-size: 15px; line-height: 1.7; color: var(--bv-slate-600);
+}
+.bv-validation__msg {
+  margin-top: 20px; padding: 14px 18px;
+  background: var(--bv-white); border-left: 3px solid var(--bv-teal);
+  border-radius: 8px;
+  font-size: 14px; font-weight: 600; color: var(--bv-navy); line-height: 1.5;
+}
+.bv-validation__list {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;
+  align-content: start;
+}
+.bv-validation__list li {
+  list-style: none; padding: 14px 16px;
+  background: var(--bv-white); border: 1px solid var(--bv-border);
+  border-radius: 10px;
+  font-size: 14px; color: var(--bv-navy); font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+}
+.bv-validation__list li::before {
+  content: ''; width: 8px; height: 8px; border-radius: 999px;
+  background: var(--bv-teal); flex-shrink: 0;
+}
+
+/* ============================================================
+   TRANSPARENCIA — Lo que BacVita no promete
+   Sobria, transparencia técnica, no advertencia legal agresiva.
+   ============================================================ */
+.bv-transparency { padding: 56px 0; background: var(--bv-white); }
+.bv-transparency__head { text-align: center; margin-bottom: 32px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.bv-transparency__head h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700; color: var(--bv-navy);
+  margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.bv-transparency__head p {
+  font-size: 14px; color: var(--bv-slate-600);
+}
+.bv-transparency__grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px;
+  margin-bottom: 26px;
+}
+.bv-transparency__item {
+  background: var(--bv-off);
+  border: 1px solid var(--bv-border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13px; color: var(--bv-navy); font-weight: 500;
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+}
+.bv-transparency__item::before {
+  content: '—'; color: var(--bv-teal-soft); font-weight: 700;
+}
+.bv-transparency__note {
+  font-size: 12px; color: var(--bv-slate-500); text-align: center;
+  padding: 12px; border-top: 1px dashed var(--bv-border);
+  max-width: 780px; margin: 0 auto; line-height: 1.55;
+}
+
+/* ============================================================
+   SECTORES — para quién es BacVita
+   ============================================================ */
+.bv-sectors { padding: 48px 0; }
+.bv-sectors__head { text-align: center; margin-bottom: 24px; }
+.bv-sectors__head h3 {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--bv-teal); margin-bottom: 6px;
+}
+.bv-sectors__head p {
+  font-size: clamp(18px, 2vw, 22px); font-weight: 600; color: var(--bv-navy);
+}
+.bv-sectors__row {
+  display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px;
+}
+.bv-sector {
+  display: flex; align-items: center; gap: 12px; justify-content: center;
+  padding: 16px 14px;
+  border: 1px solid var(--bv-border); border-radius: 10px; background: var(--bv-white);
+}
+.bv-sector svg { width: 22px; height: 22px; color: var(--bv-teal); flex-shrink: 0; }
+.bv-sector span { font-size: 13px; font-weight: 600; color: var(--bv-navy); }
+
+/* ============================================================
+   CTA final / Contacto
+   ============================================================ */
+.bv-cta { background: var(--bv-off); padding: 56px 0; border-top: 1px solid var(--bv-border); }
+.bv-cta__inner {
+  background: var(--bv-navy); color: var(--bv-white);
+  border-radius: var(--bv-radius-lg);
+  padding: 44px 48px;
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center;
+}
+.bv-cta__title {
+  font-size: clamp(22px, 2.6vw, 32px); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.bv-cta__desc { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.65; max-width: 480px; }
+.bv-cta__actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.bv-cta__btn-wa {
+  background: var(--bv-white); color: var(--bv-navy);
+}
+.bv-cta__btn-wa:hover { background: var(--bv-off-2); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.bv-footer {
+  padding: 28px 0;
+  background: var(--bv-white); border-top: 1px solid var(--bv-slate-100);
+}
+.bv-footer__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+}
+.bv-footer__brand { font-size: 13px; color: var(--bv-slate-600); }
+.bv-footer__brand strong { color: var(--bv-navy); }
+.bv-footer__links { display: flex; gap: 20px; }
+.bv-footer__links a {
+  font-size: 12px; color: var(--bv-slate-500); font-weight: 600;
+  transition: color var(--bv-transition);
+}
+.bv-footer__links a:hover { color: var(--bv-teal); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .bv-hero__grid { gap: 40px; }
+  .bv-cta__inner { padding: 36px; }
+}
+
+@media (max-width: 900px) {
+  .bv-nav, .bv-header .bv-btn { display: none; }
+  .bv-nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .bv-hero { padding: 48px 0 64px; }
+  .bv-hero__grid { grid-template-columns: 1fr; }
+  .bv-hero__visual { min-height: 380px; margin-top: 8px; }
+  .bv-problem__grid { grid-template-columns: 1fr; gap: 24px; }
+  .bv-solution__grid { grid-template-columns: 1fr; }
+  .bv-benefits__row { grid-template-columns: 1fr; gap: 20px; }
+  .bv-process__steps { grid-template-columns: 1fr; }
+  .bv-validation__grid { grid-template-columns: 1fr; gap: 28px; }
+  .bv-validation__list { grid-template-columns: 1fr; }
+  .bv-transparency__grid { grid-template-columns: 1fr; }
+  .bv-sectors__row { grid-template-columns: repeat(2, 1fr); }
+  .bv-cta__inner { grid-template-columns: 1fr; text-align: left; padding: 32px 24px; }
+  .bv-cta__actions { justify-content: flex-start; }
+
+  /* Nav mobile visible cuando #bv-nav está :target o con clase .bv-nav--open */
+  .bv-nav {
+    position: absolute; top: 64px; left: 0; right: 0;
+    background: var(--bv-white); border-bottom: 1px solid var(--bv-border);
+    flex-direction: column; align-items: stretch;
+    padding: 12px 24px; gap: 4px;
+    display: none;
+  }
+  .bv-nav.bv-nav--open { display: flex; }
+  .bv-nav.bv-nav--open .bv-nav__link {
+    padding: 12px 0; border-bottom: 1px solid var(--bv-slate-100); font-size: 15px;
+  }
+  .bv-nav.bv-nav--open .bv-btn { display: inline-flex; margin-top: 8px; align-self: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .bv-container { padding: 0 18px; }
+  .bv-mini { grid-template-columns: 1fr 1fr; }
+  .bv-mini__item:nth-child(3) { grid-column: 1 / -1; }
+  .bv-hero__card { position: static; margin-top: 16px; max-width: none; }
+  .bv-sectors__row { grid-template-columns: 1fr; }
+  .bv-brand__divider, .bv-brand__tag { display: none; }
+}
