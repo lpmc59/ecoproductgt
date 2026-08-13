@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BacVita | Solución microbiológica para PTAR hospitalarias</title>
+  <meta name="description" content="BacVita es una solución microbiológica en polvo desarrollada para reforzar la actividad biológica y apoyar la estabilidad operativa de PTAR hospitalarias.">
+  <link rel="canonical" href="https://ecoproductgt.com/bacvita">
+
+  <meta property="og:title" content="BacVita | Solución microbiológica para PTAR hospitalarias">
+  <meta property="og:description" content="Consorcios microbiológicos y metodología de aplicación que se adapta a las condiciones reales de cada PTAR.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ecoproductgt.com/bacvita">
+  <meta property="og:image" content="https://ecoproductgt.com/assets/bacvita/bacvita-bottle-front.jpg">
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bacvita.css">
+</head>
+<body class="bv-page">
+
+  <%- include('partials/bacvita/header') %>
+
+  <main id="main">
+    <%- include('partials/bacvita/hero') %>
+    <%- include('partials/bacvita/problems') %>
+    <%- include('partials/bacvita/solution') %>
+    <%- include('partials/bacvita/process') %>
+    <%- include('partials/bacvita/results') %>
+    <%- include('partials/bacvita/sectors') %>
+    <%- include('partials/bacvita/contact') %>
+  </main>
+
+  <%- include('partials/bacvita/footer') %>
+
+  <script>
+    // Cerrar menú mobile al hacer click en enlace interno
+    document.querySelectorAll('#bv-nav a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(){
+        var n = document.getElementById('bv-nav');
+        var btn = document.querySelector('.bv-nav-toggle');
+        if (n && n.classList.contains('bv-nav--open')) {
+          n.classList.remove('bv-nav--open');
+          if (btn) { btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Abrir menú'); }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
