@@ -5,8 +5,29 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// --- Carga de .env (sin dependencia externa) ---
+// Lee pares KEY=VALOR del archivo .env en la raíz. No reemplaza valores ya
+// definidos en el entorno. Soporta comentarios con #, comillas simples y dobles.
+(function loadDotEnv() {
+  const envPath = path.join(__dirname, '.env');
+  if (!fs.existsSync(envPath)) return;
+  fs.readFileSync(envPath, 'utf8').split(/\r?\n/).forEach(line => {
+    if (!line || line.trim().startsWith('#')) return;
+    const m = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*$/i);
+    if (!m) return;
+    let v = m[2];
+    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) v = v.slice(1, -1);
+    if (!(m[1] in process.env)) process.env[m[1]] = v;
+  });
+})();
+
 const app = express();
-const PORT = 6001;
+const PORT = parseInt(process.env.PORT, 10) || 6001;
+// Credenciales iniciales SOLO para el primer arranque (cuando se crea data/db.json).
+// Si ya existe db.json, se ignoran. En producción se recomienda definir
+// ADMIN_INITIAL_PASSWORD en .env antes del primer arranque y cambiar la clave desde /admin.
+const INITIAL_ADMIN_USER = process.env.ADMIN_INITIAL_USER || 'admin';
+const INITIAL_ADMIN_PASS = process.env.ADMIN_INITIAL_PASSWORD || 'admin123';
 
 // --- JSON-based DB ---
 const DB_PATH = path.join(__dirname, 'data', 'db.json');
@@ -15,7 +36,7 @@ function loadDB() {
   if (!fs.existsSync(DB_PATH)) {
     const initial = {
       users: [
-        { id: 1, username: 'admin', password: bcrypt.hashSync('admin123', 10), role: 'admin', createdAt: new Date().toISOString() }
+        { id: 1, username: INITIAL_ADMIN_USER, password: bcrypt.hashSync(INITIAL_ADMIN_PASS, 10), role: 'admin', createdAt: new Date().toISOString() }
       ],
       siteContent: {
         heroTitle: 'El futuro del agua ya está aquí',
@@ -318,7 +339,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
-  secret: 'ecoproduct-secret-key-2026',
+  secret: process.env.SESSION_SECRET || 'ecoproduct-dev-only-set-SESSION_SECRET-in-env',
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 24 * 60 * 60 * 1000 }
@@ -657,5 +678,12 @@ app.post('/admin/users/change-password/:id', requireAuth, requireAdmin, (req, re
 app.listen(PORT, () => {
   console.log(`EcoProduct corriendo en http://localhost:${PORT}`);
   console.log(`Panel de admin: http://localhost:${PORT}/admin`);
-  console.log(`Usuario: admin | Contraseña: admin123`);
+  if (!process.env.SESSION_SECRET) {
+    console.warn('⚠️  SESSION_SECRET no definido en el entorno. Usando valor por defecto (NO apto para producción). Definir SESSION_SECRET en .env.');
+  }
+  // El default admin/admin123 solo aplica cuando se crea data/db.json por primera vez.
+  // En entornos ya inicializados, cambiar la contraseña desde /admin/users.
+  if (!process.env.ADMIN_INITIAL_PASSWORD && !fs.existsSync(DB_PATH)) {
+    console.log(`Credenciales iniciales → usuario: ${INITIAL_ADMIN_USER} / contraseña: ${INITIAL_ADMIN_PASS}  (cambiar al primer login)`);
+  }
 });
