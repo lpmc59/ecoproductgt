@@ -1,27 +1,67 @@
-<section class="bv-problems" id="problemas" aria-labelledby="bv-problems-title">
+<section class="bv-section bv-problems" id="problema" aria-labelledby="bv-problems-title">
   <div class="bv-container">
-    <h2 class="bv-problems__title" id="bv-problems-title">¿Qué problemas enfrentan las PTAR?</h2>
-    <div class="bv-problems__grid">
-      <article class="bv-problem-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/><path d="M2 12c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/><path d="M2 18c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/></svg>
-        <h3>Baja eficiencia biológica</h3>
-        <p>Procesos que no alcanzan la remoción esperada de materia orgánica.</p>
+    <div class="bv-head">
+      <p class="bv-kicker">El problema</p>
+      <h2 class="bv-head__title" id="bv-problems-title">Una PTAR que pierde estabilidad se nota rápido.</h2>
+      <p class="bv-head__desc">
+        Son los puntos que el encargado técnico revisa cada semana y los que
+        más llegan a gerencia.
+      </p>
+    </div>
+
+    <div class="bv-bento bv-bento--problems">
+      <article class="bv-poster bv-poster--odor">
+        <img class="bv-poster__img" src="/assets/bacvita/bacvita-problem-olores.png" alt="Vapor sobre un tanque de concreto de una planta de tratamiento rodeada de vegetación" loading="lazy" decoding="async" width="1181" height="1181">
+        <p class="bv-poster__unit">H₂S · gases</p>
+        <div class="bv-poster__body">
+          <h3>Olores</h3>
+          <p>Salen de la planta y llegan a vecinos, pacientes y personal. Suele ser la primera queja y la más difícil de ignorar.</p>
+        </div>
       </article>
-      <article class="bv-problem-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <h3>Lodos inestables</h3>
-        <p>Variaciones en sedimentación, arrastre de sólidos y baja compactación.</p>
+
+      <article class="bv-poster bv-poster--load">
+        <img class="bv-poster__img" src="/assets/bacvita/bacvita-problem-dbo.png" alt="Operador con casco y mascarilla tomando una muestra de agua en un tanque de la PTAR" loading="lazy" decoding="async" width="1181" height="1181">
+        <p class="bv-poster__unit">DBO₅ · DQO · mg/L</p>
+        <div class="bv-poster__body">
+          <h3>DBO<sub>5</sub> y DQO fuera de rango</h3>
+          <p>Si la carga orgánica supera lo que el reactor degrada, el agua sale con valores altos y la planta queda expuesta frente al reglamento.</p>
+        </div>
       </article>
-      <article class="bv-problem-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.09 3 12.25c0 2.22 1.8 4.05 4 4.05Z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
-        <h3>Amonio fuera de norma</h3>
-        <p>Dificultad para nitrificar ante choques de carga u operación variable.</p>
+
+      <article class="bv-poster bv-poster--sludge">
+        <img class="bv-poster__img" src="/assets/bacvita/bacvita-problem-lodos.png" alt="Canal de la planta cubierto de lodos y grasas flotantes" loading="lazy" decoding="async" width="1181" height="1181">
+        <p class="bv-poster__unit">
+          <span class="bv-tag bv-tag--sludge">Lodos</span>
+          <span class="bv-tag bv-tag--grease">Grasas</span>
+        </p>
+        <div class="bv-poster__body">
+          <h3>Lodos y grasas acumulados</h3>
+          <p>Obligan a limpiezas más frecuentes, suben el costo de mantenimiento y frenan el trabajo de las bacterias.</p>
+        </div>
       </article>
-      <article class="bv-problem-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-        <h3>Mayor consumo operativo</h3>
-        <p>Uso creciente de químicos y energía para compensar desequilibrios.</p>
+
+      <article class="bv-poster bv-poster--trace">
+        <img class="bv-poster__img" src="/assets/bacvita/bacvita-problem-trazas.png" alt="Manos con guantes sosteniendo un frasco con una muestra de agua frente a los canales de la PTAR, con un hospital al fondo" loading="lazy" decoding="async" width="1254" height="1254">
+        <p class="bv-poster__unit">Trazas</p>
+        <div class="bv-poster__body">
+          <h3>Restos de medicamentos y desinfectantes</h3>
+          <p>En aguas de hospitales y centros de salud pueden llegar trazas farmacéuticas y químicos de limpieza que hacen más compleja la corriente.</p>
+        </div>
+      </article>
+
+      <article class="bv-poster bv-poster--log">
+        <img class="bv-poster__img" src="/assets/bacvita/bacvita-problem-registro.png" alt="Técnico con guantes anotando datos en una bitácora junto a los tanques" loading="lazy" decoding="async" width="1181" height="1181">
+        <p class="bv-poster__unit">Bitácora</p>
+        <div class="bv-poster__body">
+          <h3>Sin registro, sin criterio</h3>
+          <p>Sin bitácora no se sabe qué ajustar ni cuándo. El producto se aplica por costumbre y no por datos de la planta.</p>
+        </div>
       </article>
     </div>
+
+    <p class="bv-norm">
+      <span>Las descargas de aguas residuales en Guatemala se rigen por el</span>
+      <b>Acuerdo Gubernativo 236-2006</b>
+    </p>
   </div>
 </section>

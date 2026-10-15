@@ -1,0 +1,258 @@
+<%
+  // Panel "Archivo": portafolio de fases anteriores, leído de data/db.json.
+  // No se muestra en la landing; se abre con la pestaña lateral, con "Successo"
+  // en el footer o con la tecla A, siempre en Fase I. Cada producto abre su
+  // detalle dentro del panel.
+  var cats = categories || [];
+  var prods = products || [];
+  var c = content || {};
+  var byOrder = function (a, b) { return (a.order || 0) - (b.order || 0); };
+  var catsII = cats.filter(function (x) { return x.fase === 'II'; }).sort(byOrder);
+  var catsI = cats.filter(function (x) { return x.fase !== 'II'; }).sort(byOrder);
+  var prodsII = prods.filter(function (p) { return p.fase === 'II'; }).sort(byOrder);
+  var prodsI = prods.filter(function (p) { return p.fase !== 'II'; }).sort(byOrder);
+  var catOf = function (id) { return cats.find(function (x) { return x.id === id; }) || {}; };
+  // Tono por línea (líneas nuevas caen en la rotación)
+  var toneMap = { hospitalarias: 'navy', industriales: 'blue', municipales: 'teal',
+                  greendrain: 'teal', agroflow: 'blue', waterbridge: 'sky', hospitalwatershield: 'navy' };
+  var tones = ['navy', 'blue', 'teal', 'sky', 'ink'];
+  var toneOf = function (catId) {
+    if (toneMap[catId]) return toneMap[catId];
+    var i = cats.map(function (x) { return x.id; }).indexOf(catId);
+    return tones[(i < 0 ? 0 : i) % tones.length];
+  };
+  // Logos de Fase II (public/assets/bacvita/bacvita-logo-<producto>.png). Vacío = wordmark con el nombre.
+  var logosII = {
+    bacvita: '/assets/bacvita/bacvita-logo.png',
+    simbiotica: '/assets/bacvita/bacvita-logo-simbiotica.png',
+    respiro: '/assets/bacvita/bacvita-logo-respiro.png'
+  };
+  // Fotos del Archivo (PNG sin fondo), por id de producto. Solo las usa este panel;
+  // si un id no está aquí, cae a productImage de db.json.
+  var fotosArchivo = {
+    greendrain: '/images/drenova-product.png',
+    homebio: '/images/homebio-product.png',
+    septiclean: '/images/septiclean-product.png',
+    biogrease: '/images/biogrease-product.png',
+    mielva: '/images/mielva-product.png',
+    liptra: '/images/liptra-product.png',
+    verdexa: '/images/verdexa-product.png',
+    palvera: '/images/palvera-product.png',
+    biodor: '/images/biodor-product.png',
+    riverpolish: '/images/riverpolish-product.png',
+    drainclean: '/images/drainclean-product.png',
+    riverbalance: '/images/riverbalance-product.png',
+    biopharma: '/images/biopharma-product.png',
+    biopowder: '/images/biopowder-product.png',
+    bioshield: '/images/bioshield-product.png'
+  };
+  // Color de cada producto, tomado de su envase: acento (texto, checks, anillo; >= 4.5:1 sobre blanco)
+  // y tenue (fondo de la forma). Escala opcional (por defecto .84) para envases muy altos o anchos.
+  // Si un id no está aquí, se usa el color de su línea.
+  var coloresArchivo = {
+    greendrain:   { acento: '#16747c', tenue: '#bfe5e6' },
+    homebio:      { acento: '#2a77a3', tenue: '#cbe8f5' },
+    septiclean:   { acento: '#2e6378', tenue: '#cfe2ea' },
+    biogrease:    { acento: '#6e6224', tenue: '#e8e0b8' },
+    mielva:       { acento: '#93561b', tenue: '#f2d9b6' },
+    liptra:       { acento: '#245955', tenue: '#c8e0dc', escala: .78 },
+    verdexa:      { acento: '#17736c', tenue: '#c3e6e0', escala: .78 },
+    palvera:      { acento: '#466f22', tenue: '#d6e8bf', escala: .78 },
+    biodor:       { acento: '#256a37', tenue: '#c6e3cc' },
+    riverpolish:  { acento: '#1d7488', tenue: '#c4e6ee', escala: .8 },
+    drainclean:   { acento: '#2a6aa0', tenue: '#cde3f4' },
+    riverbalance: { acento: '#4c6f3c', tenue: '#d3e3c6', escala: .78 },
+    biopharma:    { acento: '#2f7a2f', tenue: '#cdeac4' },
+    biopowder:    { acento: '#1f559a', tenue: '#cbdcf2' },
+    bioshield:    { acento: '#23308a', tenue: '#cdd2f0' }
+  };
+  // Forma detrás de la foto, una por línea: círculo, arco, círculo con anillo y burbujas, blob
+  var formaMap = { greendrain: 'circle', agroflow: 'arch', waterbridge: 'ring', hospitalwatershield: 'blob' };
+  var formaOf = function (catId) { return formaMap[catId] || 'circle'; };
+  var styleOf = function (p) {
+    var k = coloresArchivo[p.id];
+    if (!k) return '';
+    return '--acc:' + k.acento + ';--acc-soft:' + k.tenue + (k.escala ? ';--scale:' + k.escala : '');
+  };
+  // Medidas reales de las imágenes del panel, para reservar su espacio antes de cargar
+  var medidas = { '/assets/bacvita/bacvita-logo.png': [1920, 1080] };
+  var sizeOf = function (src) {
+    if (medidas[src]) return medidas[src];
+    if (/^\/(images|assets\/bacvita)\/[a-z-]+-(product|logo-[a-z]+)\.png$/.test(src)) return [1772, 1772];
+    return null;
+  };
+  // Qué se muestra en la tarjeta: logo (Fase II), foto o logo (Fase I) o wordmark si no hay imagen
+  var mediaOf = function (p) {
+    if (p.fase === 'II') {
+      var logo = logosII[p.id] || p.logoImage;
+      return logo ? { kind: 'logo', src: logo } : { kind: 'word' };
+    }
+    var foto = fotosArchivo[p.id] || p.productImage;
+    if (foto) return { kind: 'photo', src: foto };
+    if (p.logoImage) return { kind: 'logo', src: p.logoImage };
+    return { kind: 'word' };
+  };
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var plural = function (n, one, many) { return n + ' ' + (n === 1 ? one : many); };
+  var detailProds = prods.filter(function (p) { return p.id !== 'bacvita' || p.fase !== 'II'; });
+%>
+<%
+  // Imagen o wordmark de un producto (tarjeta y detalle)
+  function media(p, cls, alt) {
+    var m = mediaOf(p), size = m.src ? sizeOf(m.src) : null;
+%>
+  <span class="<%= cls %> bv-arc-media bv-arc-media--<%= m.kind %><%= m.kind === 'photo' ? ' bv-shape--' + formaOf(p.category) : '' %>">
+    <% if (m.kind === 'word') { %>
+      <span class="bv-wordmark" aria-hidden="true"><%= p.name %></span>
+    <% } else { %>
+      <% if (m.kind === 'photo') { %><span class="bv-arc-shape" aria-hidden="true"></span><% } %>
+      <img src="<%= m.src %>" alt="<%= alt || '' %>" loading="lazy" decoding="async"<% if (size) { %> width="<%= size[0] %>" height="<%= size[1] %>"<% } %>>
+    <% } %>
+  </span>
+<% } %>
+<%
+  // Tarjeta de producto (botón que abre el detalle dentro del panel)
+  function card(p, n) {
+    var cat = catOf(p.category), isCurrent = p.id === 'bacvita' && p.fase === 'II';
+%>
+  <li class="bv-arc-card bv-tone--<%= toneOf(p.category) %>"<% if (styleOf(p)) { %> style="<%= styleOf(p) %>"<% } %>>
+    <% if (isCurrent) { %>
+      <a class="bv-arc-card__hit" href="#inicio" data-bv-archive-close>
+    <% } else { %>
+      <button class="bv-arc-card__hit" type="button" data-bv-detail="bv-detail-<%= p.id %>" aria-controls="bv-detail-<%= p.id %>">
+    <% } %>
+        <% media(p, 'bv-arc-card__media'); %>
+        <span class="bv-arc-card__body">
+          <span class="bv-arc-card__meta">
+            <span class="bv-arc-card__num"><%= pad(n) %></span>
+            <span class="bv-arc-card__line"><%= cat.name || '' %></span>
+          </span>
+          <span class="bv-arc-card__name"><%= p.name %></span>
+          <span class="bv-arc-card__sub"><%= isCurrent ? 'Hoy es BacVita by Successo: el producto de esta página.' : p.subtitle %></span>
+          <span class="bv-arc-card__more"><%= isCurrent ? 'Volver a la página' : 'Ver detalle' %></span>
+        </span>
+    <% if (isCurrent) { %></a><% } else { %></button><% } %>
+  </li>
+<% } %>
+
+<button class="bv-archive-tab" type="button" data-bv-archive-open aria-controls="bv-archive" aria-expanded="false" aria-haspopup="dialog" aria-label="Abrir archivo de fases anteriores (tecla A)">Archivo</button>
+
+<div class="bv-archive" id="bv-archive" hidden>
+  <aside class="bv-archive__drawer" id="bv-archive-drawer" role="dialog" aria-modal="true" aria-labelledby="bv-archive-title">
+    <div class="bv-archive__head">
+      <div>
+        <p class="bv-kicker">Archivo Successo</p>
+        <h2 id="bv-archive-title">Portafolio anterior</h2>
+        <p>Las líneas que se mostraban antes en EcoProduct, ordenadas por fase.</p>
+      </div>
+      <button class="bv-archive__close" type="button" id="bv-archive-close" aria-label="Cerrar archivo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="bv-archive__list" id="bv-archive-list">
+      <div class="bv-archive__tabs" role="tablist" aria-label="Fases">
+        <button role="tab" type="button" id="bv-tab-1" aria-selected="true" aria-controls="bv-panel-1" tabindex="0"><span class="bv-archive__tab-n" aria-hidden="true">01</span>Fase I</button>
+        <button role="tab" type="button" id="bv-tab-2" aria-selected="false" aria-controls="bv-panel-2" tabindex="-1"><span class="bv-archive__tab-n" aria-hidden="true">02</span>Fase II</button>
+        <button role="tab" type="button" id="bv-tab-0" aria-selected="false" aria-controls="bv-panel-0" tabindex="-1"><span class="bv-archive__tab-n" aria-hidden="true">03</span>EcoProduct</button>
+      </div>
+
+      <div class="bv-archive__panel" id="bv-panel-1" role="tabpanel" aria-labelledby="bv-tab-1">
+        <header class="bv-arc-phase">
+          <span class="bv-arc-phase__num" aria-hidden="true">01</span>
+          <div class="bv-arc-phase__text">
+            <p class="bv-arc-phase__label">Fase I · <%= plural(prodsI.length, 'producto', 'productos') %> · <%= plural(catsI.length, 'línea', 'líneas') %></p>
+            <% if (c.faseITitle) { %><h3><%= c.faseITitle %></h3><% } %>
+            <% if (c.faseISubtitle) { %><p><%= c.faseISubtitle %></p><% } %>
+          </div>
+        </header>
+        <% var nI = 0; %>
+        <% catsI.forEach(function (cat, li) {
+             var list = prodsI.filter(function (p) { return p.category === cat.id; }); %>
+          <section class="bv-arc-line bv-tone--<%= toneOf(cat.id) %>" aria-labelledby="bv-line-<%= cat.id %>">
+            <div class="bv-arc-line__head">
+              <p class="bv-arc-line__index">Línea <%= pad(li + 1) %> · <%= plural(list.length, 'producto', 'productos') %></p>
+              <h4 id="bv-line-<%= cat.id %>"><span class="bv-arc-line__dot" aria-hidden="true"></span><%= cat.name %></h4>
+              <p><%= cat.description %></p>
+            </div>
+            <% if (list.length) { %>
+              <ul class="bv-arc-grid">
+                <% list.forEach(function (p) { card(p, ++nI); }) %>
+              </ul>
+            <% } else { %>
+              <p class="bv-arc-line__empty">Esta línea no tiene productos publicados.</p>
+            <% } %>
+          </section>
+        <% }) %>
+      </div>
+
+      <div class="bv-archive__panel" id="bv-panel-2" role="tabpanel" aria-labelledby="bv-tab-2" hidden>
+        <header class="bv-arc-phase">
+          <span class="bv-arc-phase__num" aria-hidden="true">02</span>
+          <div class="bv-arc-phase__text">
+            <p class="bv-arc-phase__label">Fase II · <%= plural(prodsII.length, 'producto', 'productos') %> · <%= plural(catsII.length, 'línea', 'líneas') %></p>
+            <% if (c.faseIITitle) { %><h3><%= c.faseIITitle %></h3><% } %>
+            <% if (c.faseIIIntro) { %><p><%= c.faseIIIntro %></p><% } %>
+          </div>
+        </header>
+        <ul class="bv-arc-grid bv-arc-grid--logos">
+          <% prodsII.forEach(function (p, i) { card(p, i + 1); }) %>
+        </ul>
+      </div>
+
+      <div class="bv-archive__panel" id="bv-panel-0" role="tabpanel" aria-labelledby="bv-tab-0" hidden>
+        <header class="bv-arc-phase">
+          <span class="bv-arc-phase__num" aria-hidden="true">03</span>
+          <div class="bv-arc-phase__text">
+            <p class="bv-arc-phase__label">EcoProduct · Sitio de origen</p>
+            <% if (c.aboutTitle) { %><h3><%= c.aboutTitle %></h3><% } %>
+            <% if (c.aboutText) { %><p><%= c.aboutText %></p><% } %>
+          </div>
+        </header>
+        <figure class="bv-arc-banner">
+          <% if (c.heroImage) { %><img src="<%= c.heroImage %>" alt="" loading="lazy" decoding="async"><% } %>
+          <figcaption>
+            <% if (c.heroTitle) { %><strong><%= c.heroTitle %></strong><% } %>
+            <% if (c.heroTagline) { %><span><%= c.heroTagline %></span><% } %>
+          </figcaption>
+        </figure>
+        <% var con = c.conceptos ? Object.keys(c.conceptos).map(function (k) { return c.conceptos[k]; }) : []; %>
+        <% if (con.length) { %>
+          <h4 class="bv-arc-sub"><%= c.conceptosTitle || 'Concepto de negocio' %></h4>
+          <% if (c.conceptosIntro) { %><p class="bv-arc-note"><%= c.conceptosIntro %></p><% } %>
+          <ol class="bv-arc-concepts">
+            <% con.forEach(function (k) { %>
+              <li><b><%= k.titulo %></b><span><%= k.texto %></span></li>
+            <% }) %>
+          </ol>
+        <% } %>
+      </div>
+    </div>
+
+    <% detailProds.forEach(function (p) {
+         var cat = catOf(p.category); %>
+      <section class="bv-arc-detail bv-tone--<%= toneOf(p.category) %>" id="bv-detail-<%= p.id %>" aria-labelledby="bv-detail-<%= p.id %>-title"<% if (styleOf(p)) { %> style="<%= styleOf(p) %>"<% } %> hidden>
+        <button class="bv-arc-detail__back" type="button" data-bv-detail-back>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          Volver al archivo
+        </button>
+        <div class="bv-arc-detail__top">
+          <% media(p, 'bv-arc-detail__media', p.name); %>
+          <div>
+            <p class="bv-arc-card__line">Fase <%= p.fase || 'I' %> · <%= cat.name || '' %></p>
+            <h3 id="bv-detail-<%= p.id %>-title"><%= p.name %></h3>
+            <p class="bv-arc-detail__sub"><%= p.subtitle %></p>
+            <% if (p.format) { %><p class="bv-arc-detail__format"><span>Formato</span> <%= p.format %></p><% } %>
+          </div>
+        </div>
+        <% if (p.description) { %><p class="bv-arc-detail__desc"><%= p.description %></p><% } %>
+        <% if (p.benefits && p.benefits.length) { %>
+          <ul class="bv-checks bv-arc-detail__benefits">
+            <% p.benefits.forEach(function (b) { %><li><%= b %></li><% }) %>
+          </ul>
+        <% } %>
+        <a class="bv-arc-detail__link" href="/producto/<%= p.id %>">Ver la ficha completa en EcoProduct</a>
+      </section>
+    <% }) %>
+  </aside>
+</div>

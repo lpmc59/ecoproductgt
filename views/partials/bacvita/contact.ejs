@@ -1,37 +1,68 @@
-<section class="bv-contact" id="contacto" aria-labelledby="bv-contact-title">
+<%
+  // Datos de contacto editables desde /admin/content (siteContent en data/db.json).
+  var email = (content && content.contactEmail) || '';
+  var wa = (content && content.whatsappNumber) ? String(content.whatsappNumber).replace(/[^\d]/g, '') : '';
+%>
+<section class="bv-section bv-contact" id="contacto" aria-labelledby="bv-contact-title">
   <div class="bv-container">
-    <div class="bv-contact__panel">
+    <div class="bv-contact__block">
       <div class="bv-contact__main">
-        <p class="bv-eyebrow">Empecemos</p>
-        <h2 class="bv-contact__title" id="bv-contact-title">
-          Demos el primer paso hacia una operación<br>
-          más eficiente y sostenible.
-        </h2>
+        <p class="bv-kicker bv-kicker--light">Contacto</p>
+        <h2 class="bv-contact__title" id="bv-contact-title">Agenda una reunión técnica para evaluar tu planta.</h2>
         <p class="bv-contact__desc">
-          Cuéntanos sobre tu planta. Nuestro equipo revisará tu caso
-          y se pondrá en contacto para orientar el siguiente paso.
+          Cuéntanos qué tipo de PTAR tienes y qué problema ves. Te respondemos
+          con una propuesta de diagnóstico.
         </p>
-        <a class="bv-contact__cta" href="mailto:info@ecoproductgt.com?subject=Solicitud%20de%20diagn%C3%B3stico%20PTAR%20%E2%80%94%20BacVita" aria-label="Enviar correo para solicitar diagnóstico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
+        <dl class="bv-contact__list">
+          <% if (email) { %>
+            <div><dt>Correo</dt><dd><a href="mailto:<%= email %>"><%= email %></a></dd></div>
+          <% } %>
+          <% if (wa) { %>
+            <div><dt>WhatsApp</dt><dd><a href="https://wa.me/<%= wa %>" rel="noopener" target="_blank"><%= content.whatsappNumber %></a></dd></div>
+          <% } %>
+          <div><dt>Horario</dt><dd>Lunes a viernes · 8:00 a 17:00</dd></div>
+        </dl>
       </div>
-      <aside class="bv-contact__aside">
-        <h3>Contacto técnico</h3>
-        <div class="bv-contact__list">
-          <div class="bv-contact__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-            <p>+502 0000 0000</p>
+
+      <form class="bv-form" id="bv-form" novalidate data-to="<%= email %>" aria-describedby="bv-form-help">
+        <p class="bv-form__help" id="bv-form-help">Los campos con * son obligatorios. Al enviar se abre tu programa de correo con el mensaje listo.</p>
+        <div class="bv-form__two">
+          <div class="bv-field">
+            <label for="bv-f-nombre">Nombre *</label>
+            <input id="bv-f-nombre" name="nombre" autocomplete="name" data-bv-required aria-describedby="bv-f-nombre-error">
+            <p class="bv-field__error" id="bv-f-nombre-error" hidden>Escribe tu nombre.</p>
           </div>
-          <div class="bv-contact__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <p>info@ecoproductgt.com</p>
-          </div>
-          <div class="bv-contact__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 15.5 14"/></svg>
-            <p>Lunes a viernes · 8:00 a 17:00</p>
+          <div class="bv-field">
+            <label for="bv-f-empresa">Empresa o institución *</label>
+            <input id="bv-f-empresa" name="empresa" autocomplete="organization" data-bv-required aria-describedby="bv-f-empresa-error">
+            <p class="bv-field__error" id="bv-f-empresa-error" hidden>Escribe el nombre de la empresa o institución.</p>
           </div>
         </div>
-      </aside>
+        <div class="bv-form__two">
+          <div class="bv-field">
+            <label for="bv-f-correo">Correo *</label>
+            <input id="bv-f-correo" name="correo" type="email" autocomplete="email" inputmode="email" data-bv-required aria-describedby="bv-f-correo-error">
+            <p class="bv-field__error" id="bv-f-correo-error" hidden>Escribe un correo válido, por ejemplo nombre@empresa.com.</p>
+          </div>
+          <div class="bv-field">
+            <label for="bv-f-tipo">Tipo de PTAR</label>
+            <select id="bv-f-tipo" name="tipo">
+              <option>Hospitalaria</option>
+              <option>Industrial</option>
+              <option>Condominio o parque industrial</option>
+              <option>Municipal</option>
+              <option>Otra</option>
+            </select>
+          </div>
+        </div>
+        <div class="bv-field">
+          <label for="bv-f-mensaje">Qué problema ves *</label>
+          <textarea id="bv-f-mensaje" name="mensaje" rows="4" placeholder="Olores, grasas, DBO₅ o DQO altas, lodos…" data-bv-required aria-describedby="bv-f-mensaje-error"></textarea>
+          <p class="bv-field__error" id="bv-f-mensaje-error" hidden>Cuéntanos brevemente qué pasa en la planta.</p>
+        </div>
+        <button class="bv-btn bv-btn--dark bv-form__submit" type="submit">Solicitar reunión</button>
+        <p class="bv-form__note" id="bv-form-note" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>

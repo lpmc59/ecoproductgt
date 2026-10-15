@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BacVita | Solución microbiológica para PTAR hospitalarias</title>
-  <meta name="description" content="BacVita es una solución microbiológica en polvo desarrollada para reforzar la actividad biológica y apoyar la estabilidad operativa de PTAR hospitalarias.">
+  <title>BacVita by Successo | Biorremediador microbiológico para PTAR</title>
+  <meta name="description" content="BacVita es un biorremediador microbiológico líquido con Bacillus para plantas de tratamiento de aguas residuales. Primero se diagnostica la planta; la dosis se define después de revisar el agua.">
   <link rel="canonical" href="https://ecoproductgt.com/bacvita">
 
-  <meta property="og:title" content="BacVita | Solución microbiológica para PTAR hospitalarias">
-  <meta property="og:description" content="Consorcios microbiológicos y metodología de aplicación que se adapta a las condiciones reales de cada PTAR.">
+  <meta property="og:title" content="BacVita by Successo | Biorremediador microbiológico para PTAR">
+  <meta property="og:description" content="Consorcio de Bacillus en botella de 1 litro, aplicado con diagnóstico, piloto, seguimiento, reporte y mantenimiento mensual.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ecoproductgt.com/bacvita">
-  <meta property="og:image" content="https://ecoproductgt.com/assets/bacvita/bacvita-bottle-front.jpg">
+  <meta property="og:image" content="https://ecoproductgt.com/assets/bacvita/bacvita-bottle-mockup.png">
 
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/bacvita.css?v=2026081302">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bacvita.css?v=2026101503">
 </head>
 <body class="bv-page">
+  <a class="bv-skip" href="#main">Saltar al contenido</a>
 
   <%- include('partials/bacvita/header') %>
 
@@ -28,25 +29,173 @@
     <%- include('partials/bacvita/problems') %>
     <%- include('partials/bacvita/solution') %>
     <%- include('partials/bacvita/process') %>
-    <%- include('partials/bacvita/results') %>
-    <%- include('partials/bacvita/sectors') %>
-    <%- include('partials/bacvita/contact') %>
+    <%- include('partials/bacvita/contact', { content: content }) %>
   </main>
 
   <%- include('partials/bacvita/footer') %>
+  <%- include('partials/bacvita/archive', { products: products, categories: categories, content: content }) %>
 
   <script>
-    // Cerrar menú mobile al hacer click en enlace interno
-    document.querySelectorAll('#bv-nav a[href^="#"]').forEach(function(a){
-      a.addEventListener('click', function(){
-        var n = document.getElementById('bv-nav');
-        var btn = document.querySelector('.bv-nav-toggle');
-        if (n && n.classList.contains('bv-nav--open')) {
-          n.classList.remove('bv-nav--open');
-          if (btn) { btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Abrir menú'); }
+  (function () {
+    // --- Menú mobile ---
+    var nav = document.getElementById('bv-nav');
+    var navBtn = document.querySelector('.bv-nav-toggle');
+    function setNav(open) {
+      nav.classList.toggle('bv-nav--open', open);
+      navBtn.setAttribute('aria-expanded', String(open));
+      navBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    }
+    if (nav && navBtn) {
+      navBtn.addEventListener('click', function () { setNav(!nav.classList.contains('bv-nav--open')); });
+      nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function () { setNav(false); });
+      });
+    }
+
+    // --- Panel Archivo: pestaña lateral, "Successo" del footer y tecla A ---
+    var veil = document.getElementById('bv-archive');
+    var drawer = document.getElementById('bv-archive-drawer');
+    var closeBtn = document.getElementById('bv-archive-close');
+    var openers = document.querySelectorAll('[data-bv-archive-open]');
+    var tabs = drawer ? Array.prototype.slice.call(drawer.querySelectorAll('[role="tab"]')) : [];
+    var lastFocus = null;
+
+    // Pestañas Fase I / Fase II / EcoProduct
+    function selectTab(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+
+    function isOpen() { return veil && !veil.hidden; }
+    function setExpanded(v) { openers.forEach(function (b) { b.setAttribute('aria-expanded', String(v)); }); }
+    function openArchive() {
+      if (!veil || isOpen()) return;
+      lastFocus = document.activeElement;
+      if (tabs.length) selectTab(tabs[0]);
+      veil.hidden = false;
+      document.documentElement.classList.add('bv-lock');
+      setExpanded(true);
+      closeBtn.focus();
+    }
+    function closeArchive() {
+      if (!isOpen()) return;
+      hideDetail(false);
+      veil.hidden = true;
+      document.documentElement.classList.remove('bv-lock');
+      setExpanded(false);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    if (veil) {
+      openers.forEach(function (b) { b.addEventListener('click', openArchive); });
+      closeBtn.addEventListener('click', closeArchive);
+      veil.addEventListener('click', function (e) { if (e.target === veil) closeArchive(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isOpen()) { e.preventDefault(); closeArchive(); return; }
+        // Atrapar el foco dentro del panel mientras está abierto
+        if (e.key === 'Tab' && isOpen()) {
+          var f = drawer.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+          f = Array.prototype.filter.call(f, function (el) { return el.offsetParent !== null; });
+          if (!f.length) return;
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+          return;
+        }
+        // Tecla A: nunca dentro de campos editables ni con modificadores
+        if ((e.key === 'a' || e.key === 'A') && !isOpen() && !e.metaKey && !e.ctrlKey && !e.altKey) {
+          var t = e.target;
+          if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+          openArchive();
         }
       });
-    });
+
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { selectTab(t); });
+        t.addEventListener('keydown', function (e) {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+          var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+          selectTab(next); next.focus();
+        });
+      });
+
+      // Detalle de producto dentro del panel (no sale de la página)
+      var list = document.getElementById('bv-archive-list');
+      var openDetail = null, detailOpener = null;
+      function showDetail(id, opener) {
+        var d = document.getElementById(id);
+        if (!d) return;
+        openDetail = d; detailOpener = opener;
+        list.hidden = true; d.hidden = false;
+        drawer.scrollTop = 0;
+        d.querySelector('[data-bv-detail-back]').focus();
+      }
+      function hideDetail(restoreFocus) {
+        if (!openDetail) return;
+        openDetail.hidden = true; list.hidden = false;
+        openDetail = null;
+        if (restoreFocus && detailOpener) detailOpener.focus();
+      }
+      drawer.querySelectorAll('[data-bv-detail]').forEach(function (b) {
+        b.addEventListener('click', function () { showDetail(b.getAttribute('data-bv-detail'), b); });
+      });
+      drawer.querySelectorAll('[data-bv-detail-back]').forEach(function (b) {
+        b.addEventListener('click', function () { hideDetail(true); });
+      });
+      drawer.querySelectorAll('[data-bv-archive-close]').forEach(function (a) {
+        a.addEventListener('click', function () { lastFocus = null; closeArchive(); });
+      });
+    }
+
+    // --- Formulario: validación en cliente; abre el correo del visitante con el mensaje listo ---
+    var form = document.getElementById('bv-form');
+    if (form) {
+      var note = document.getElementById('bv-form-note');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var ok = true, firstBad = null;
+        form.querySelectorAll('[data-bv-required]').forEach(function (el) {
+          var bad = !el.value.trim();
+          el.setAttribute('aria-invalid', String(bad));
+          var err = document.getElementById(el.id + '-error');
+          if (err) err.hidden = !bad;
+          if (bad) { ok = false; firstBad = firstBad || el; }
+        });
+        var mail = document.getElementById('bv-f-correo');
+        if (mail.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail.value.trim())) {
+          mail.setAttribute('aria-invalid', 'true');
+          document.getElementById('bv-f-correo-error').hidden = false;
+          ok = false; firstBad = firstBad || mail;
+        }
+        if (!ok) {
+          note.textContent = 'Revisa los campos marcados.';
+          firstBad.focus();
+          return;
+        }
+        var to = form.getAttribute('data-to');
+        if (!to) { note.textContent = 'Formulario listo, pero aún no hay correo de contacto configurado.'; return; }
+        var v = function (id) { return document.getElementById(id).value.trim(); };
+        var body = 'Nombre: ' + v('bv-f-nombre') + '\nEmpresa: ' + v('bv-f-empresa') +
+                   '\nCorreo: ' + v('bv-f-correo') + '\nTipo de PTAR: ' + v('bv-f-tipo') +
+                   '\n\nQué vemos en la planta:\n' + v('bv-f-mensaje');
+        note.textContent = 'Abrimos tu programa de correo con el mensaje listo. Si no se abre, escríbenos a ' + to + '.';
+        window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Diagnóstico de PTAR — BacVita') + '&body=' + encodeURIComponent(body);
+      });
+      form.querySelectorAll('input, textarea, select').forEach(function (el) {
+        el.addEventListener('input', function () {
+          if (el.getAttribute('aria-invalid') === 'true' && el.value.trim()) {
+            el.setAttribute('aria-invalid', 'false');
+            var err = document.getElementById(el.id + '-error');
+            if (err) err.hidden = true;
+          }
+        });
+      });
+    }
+  })();
   </script>
 </body>
 </html>

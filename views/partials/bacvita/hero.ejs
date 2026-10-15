@@ -1,47 +1,102 @@
+<%
+  // Bacilos de la caja de Petri: se generan en el servidor con semilla fija,
+  // así el dibujo es estable entre cargas y no depende de JavaScript.
+  var seed = 11;
+  function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  var cells = [];
+  for (var i = 0; i < 58; i++) {
+    var an = rnd() * Math.PI * 2, d = 17 + rnd() * 28;
+    var x = 50 + Math.cos(an) * d, y = 50 + Math.sin(an) * d;
+    var c = {
+      x: x.toFixed(2), y: y.toFixed(2),
+      rod: rnd() < 0.7,
+      w: (2.6 + rnd() * 2.6).toFixed(2), h: (1 + rnd() * 0.7).toFixed(2),
+      rot: Math.round(rnd() * 180),
+      r: (0.5 + rnd() * 1.1).toFixed(2),
+      tone: rnd() > 0.78 ? 'teal' : 'blue',
+      op: (0.3 + rnd() * 0.5).toFixed(2),
+      dur: (4 + rnd() * 6).toFixed(1), delay: (rnd() * 8).toFixed(1),
+      dx: ((rnd() - 0.5) * 2.4).toFixed(2), dy: ((rnd() - 0.5) * 2.4).toFixed(2)
+    };
+    cells.push(c);
+  }
+%>
 <section class="bv-hero" id="inicio" aria-labelledby="bv-hero-title">
   <div class="bv-container bv-hero__grid">
-    <div>
-      <p class="bv-eyebrow">Microbiología aplicada</p>
+    <div class="bv-hero__copy">
+      <p class="bv-kicker">Biorremediador microbiológico líquido · PTAR</p>
       <h1 class="bv-hero__title" id="bv-hero-title">
-        Tu PTAR puede funcionar mejor.<br>
-        Nosotros te ayudamos a lograrlo.
+        BacVita no se aplica <em>a ciegas.</em>
       </h1>
-      <p class="bv-hero__desc">
-        BacVita es una solución microbiológica especializada que activa
-        y estabiliza los procesos biológicos para lograr una operación
-        más eficiente, confiable y sostenible.
+      <p class="bv-hero__lead">
+        Es un consorcio de <i>Bacillus</i> en líquido para plantas de tratamiento
+        de aguas residuales. Primero revisamos el agua de tu planta; la dosis
+        se define después, con esos datos.
       </p>
-
-      <div class="bv-hero__metrics" role="list">
-        <div class="bv-hero__metric" role="listitem">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/><path d="M2 12c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/><path d="M2 18c2 0 2 2 4 2s2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/></svg>
-          <p class="bv-hero__metric-label">Mejor calidad de efluente</p>
-        </div>
-        <div class="bv-hero__metric" role="listitem">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
-          <p class="bv-hero__metric-label">Operación más estable</p>
-        </div>
-        <div class="bv-hero__metric" role="listitem">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96c.68 4.32-.7 9.2-3.24 12.42A9.36 9.36 0 0 1 7 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
-          <p class="bv-hero__metric-label">Menor consumo químico</p>
-        </div>
+      <div class="bv-hero__cta">
+        <a class="bv-btn bv-btn--dark" href="#contacto">
+          Agenda un diagnóstico
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="bv-btn bv-btn--ghost" href="#servicio">Ver las 5 etapas</a>
       </div>
-
-      <a href="#contacto" class="bv-hero__cta" aria-label="Solicita un diagnóstico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <p class="bv-hero__note">Un diagnóstico técnico, claro y adaptado a tu operación.</p>
+      <ul class="bv-chips" aria-label="Datos del producto">
+        <li class="bv-chip">Consorcio de <i>Bacillus</i></li>
+        <li class="bv-chip">Botella de 1 litro</li>
+        <li class="bv-chip">Diagnóstico antes de dosificar</li>
+      </ul>
     </div>
 
     <div class="bv-hero__visual">
-      <div class="bv-hero__arc" aria-hidden="true"></div>
-      <img class="bv-hero__product"
-           src="/assets/bacvita/bacvita-bottle-front.jpg"
-           alt="Envase BacVita — Solución microbiológica para PTAR, 1 litro">
-      <div class="bv-hero__overlay" role="complementary">
-        <p class="bv-hero__overlay-title">Biotecnología que fortalece tu operación</p>
-        <p class="bv-hero__overlay-caption">Soporte técnico especializado</p>
+      <div class="bv-petri" aria-hidden="true">
+        <span class="bv-petri__ring"></span>
+        <span class="bv-petri__ripple"></span>
+        <span class="bv-petri__ripple bv-petri__ripple--late"></span>
+        <svg class="bv-petri__cells" viewBox="0 0 100 100" focusable="false">
+          <% cells.forEach(function (c) { %>
+            <g class="bv-cell" style="--t:<%= c.dur %>s;--d:-<%= c.delay %>s;--dx:<%= c.dx %>px;--dy:<%= c.dy %>px">
+              <% if (c.rod) { %>
+                <rect class="bv-cell--<%= c.tone %>" x="<%= (c.x - c.w / 2).toFixed(2) %>" y="<%= (c.y - c.h / 2).toFixed(2) %>" width="<%= c.w %>" height="<%= c.h %>" rx="<%= (c.h / 2).toFixed(2) %>" opacity="<%= c.op %>" transform="rotate(<%= c.rot %> <%= c.x %> <%= c.y %>)"/>
+              <% } else { %>
+                <circle class="bv-cell--<%= c.tone %>" cx="<%= c.x %>" cy="<%= c.y %>" r="<%= c.r %>" opacity="<%= c.op %>"/>
+              <% } %>
+            </g>
+          <% }) %>
+        </svg>
       </div>
+      <img class="bv-hero__bottle"
+           src="/assets/bacvita/bacvita-bottle-mockup.png"
+           alt="Botella de 1 litro de BacVita, cuerpo y tapa turquesa con etiqueta blanca: biorremediador microbiológico para tratamiento de aguas residuales, de Successo"
+           width="1181" height="1181" fetchpriority="high">
+
+      <div class="bv-float bv-float--1">
+        <img src="/assets/bacvita/bacvita-icon-dbo.png" alt="" width="1772" height="1772">
+        <span><b>DBO<sub>5</sub></b><small>mg/L</small></span>
+      </div>
+      <div class="bv-float bv-float--2">
+        <img src="/assets/bacvita/bacvita-icon-dqo.png" alt="" width="1772" height="1772">
+        <span><b>DQO</b><small>mg/L</small></span>
+      </div>
+      <div class="bv-float bv-float--3">
+        <img src="/assets/bacvita/bacvita-icon-olores.png" alt="" width="1772" height="1772">
+        <span><b>Olores</b><small>H₂S</small></span>
+      </div>
+      <div class="bv-float bv-float--4">
+        <img src="/assets/bacvita/bacvita-icon-lodos.png" alt="" width="1181" height="1181">
+        <span><b>Lodos y grasas</b><small>bitácora</small></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bv-ribbon" aria-label="Términos de trabajo en la PTAR">
+    <div class="bv-ribbon__track">
+      <% var terms = ['DBO₅', 'DQO', 'H₂S', 'Lodos', 'Grasas', 'Trazas', '<i>Bacillus</i>', 'Bitácora', 'Punto de aplicación', 'AG 236-2006']; %>
+      <ul class="bv-ribbon__list">
+        <% terms.forEach(function (t) { %><li><%- t %></li><% }) %>
+      </ul>
+      <ul class="bv-ribbon__list" aria-hidden="true">
+        <% terms.forEach(function (t) { %><li><%- t %></li><% }) %>
+      </ul>
     </div>
   </div>
 </section>

@@ -1,54 +1,71 @@
-<section class="bv-process" id="proceso" aria-labelledby="bv-process-title">
+<%
+  var stages = [
+    { n: 1, tag: 'Visita técnica',  title: 'Diagnóstico', text: 'Revisamos el agua que recibe la planta, identificamos el problema principal y definimos el punto de aplicación.', alt: 'Ilustración de tubo de ensayo, tanque y lista de revisión' },
+    { n: 2, tag: 'Prueba inicial',  title: 'Piloto',      text: 'Entregamos BacVita para la prueba, acompañamos el arranque y capacitamos al operador.', alt: 'Ilustración de una botella turquesa vertiendo líquido en un recipiente', chip: 'BacVita Start' },
+    { n: 3, tag: 'Bitácora',        title: 'Seguimiento', text: 'Registramos olores, lodos, grasas y DBO₅/DQO, y ajustamos la aplicación cuando hace falta.', alt: 'Ilustración de bitácora con gráfica, botella y frascos de muestra' },
+    { n: 4, tag: 'Reporte en PDF',  title: 'Reporte',     text: 'Resultados del piloto con lo observado en la planta y recomendación de continuidad.', alt: 'Ilustración de un reporte con gráfica de barras y marca de aprobado' },
+    { n: 5, tag: 'Plan mensual',    title: 'Continuidad', text: 'Mantenimiento mensual: reposición según consumo real y seguimiento técnico para sostener el tratamiento.', alt: 'Ilustración de calendario y botella con flechas de ciclo' }
+  ];
+%>
+<section class="bv-section bv-process" id="servicio" aria-labelledby="bv-process-title">
   <div class="bv-container">
-    <h2 class="bv-process__title" id="bv-process-title">Nuestro proceso en 7 pasos</h2>
-    <p class="bv-process__subtitle">No solo entregamos un producto: acompañamos el proceso completo.</p>
+    <div class="bv-head">
+      <p class="bv-kicker">El servicio</p>
+      <h2 class="bv-head__title" id="bv-process-title">Del diagnóstico al mantenimiento mensual.</h2>
+      <p class="bv-head__desc">
+        BacVita no termina con la primera aplicación. Cada etapa deja registro
+        y sirve para decidir la siguiente.
+      </p>
+    </div>
 
-    <div class="bv-process__wrap">
-      <div class="bv-process__line" aria-hidden="true"></div>
-      <ol class="bv-process__steps">
-        <li class="bv-process__step">
-          <span class="bv-process__circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </span>
-          <p class="bv-process__label">Diagnóstico inicial</p>
-        </li>
-        <li class="bv-process__step">
-          <span class="bv-process__circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31L4.66 18.68A2 2 0 0 0 6.4 22h11.2a2 2 0 0 0 1.74-3.32L14 9.31V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><line x1="7" y1="16" x2="17" y2="16"/></svg>
-          </span>
-          <p class="bv-process__label">Análisis técnico</p>
-        </li>
-        <li class="bv-process__step">
-          <span class="bv-process__circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="4" x2="14" y2="4"/><line x1="10" y1="4" x2="3" y2="4"/><line x1="21" y1="12" x2="12" y2="12"/><line x1="8" y1="12" x2="3" y2="12"/><line x1="21" y1="20" x2="16" y2="20"/><line x1="12" y1="20" x2="3" y2="20"/><line x1="14" y1="2" x2="14" y2="6"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="16" y1="18" x2="16" y2="22"/></svg>
-          </span>
-          <p class="bv-process__label">Plan de aplicación</p>
-        </li>
-        <li class="bv-process__step">
-          <span class="bv-process__circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg>
-          </span>
-          <p class="bv-process__label">Dosificación</p>
-        </li>
-        <li class="bv-process__step">
-          <span class="bv-process__circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </span>
-          <p class="bv-process__label">Monitoreo</p>
-        </li>
-        <li class="bv-process__step">
-          <span class="bv-process__circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="3" x2="3" y2="21"/><line x1="3" y1="21" x2="21" y2="21"/><polyline points="7 14 11 10 14 13 20 7"/></svg>
-          </span>
-          <p class="bv-process__label">Medición de resultados</p>
-        </li>
-        <li class="bv-process__step">
-          <span class="bv-process__circle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </span>
-          <p class="bv-process__label">Optimización continua</p>
-        </li>
+    <div class="bv-route">
+      <svg class="bv-route__path" viewBox="0 0 1000 140" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="bv-route__trail" d="M0,70 C50,70 50,28 100,28 C200,28 200,112 300,112 C400,112 400,28 500,28 C600,28 600,112 700,112 C800,112 800,28 900,28 C950,28 950,70 1000,70"/>
+        <path class="bv-route__line" d="M0,70 C50,70 50,28 100,28 C200,28 200,112 300,112 C400,112 400,28 500,28 C600,28 600,112 700,112 C800,112 800,28 900,28 C950,28 950,70 1000,70"/>
+      </svg>
+
+      <ol class="bv-route__steps">
+        <% stages.forEach(function (s) { %>
+          <li class="bv-step bv-step--<%= s.n % 2 ? 'up' : 'down' %>">
+            <span class="bv-step__node" aria-hidden="true"><%= s.n %></span>
+            <div class="bv-step__body">
+              <span class="bv-step__media">
+                <img src="/assets/bacvita/bacvita-step-<%= s.n %>.png" alt="<%= s.alt %>" loading="lazy" decoding="async" width="1181" height="1181">
+              </span>
+              <p class="bv-step__tag">Etapa <%= s.n %> · <%= s.tag %></p>
+              <h3 class="bv-step__title"><%= s.title %></h3>
+              <p class="bv-step__text"><%= s.text %></p>
+              <% if (s.chip) { %><span class="bv-step__chip"><%= s.chip %></span><% } %>
+            </div>
+          </li>
+        <% }) %>
       </ol>
+    </div>
+
+    <div class="bv-bento bv-bento--maint">
+      <article class="bv-tile bv-tile--maint">
+        <p class="bv-kicker">Mantenimiento mensual</p>
+        <h3>Tu PTAR con seguimiento, no con una sola aplicación.</h3>
+        <ul class="bv-checks">
+          <li>Reposición de BacVita según consumo real</li>
+          <li>Dosis de mantenimiento definida en el seguimiento</li>
+          <li>Revisión de la bitácora operativa</li>
+          <li>Ajustes del punto y la frecuencia de aplicación</li>
+          <li>Seguimiento técnico</li>
+        </ul>
+      </article>
+      <div class="bv-tile bv-tile--report">
+        <div class="bv-report" role="img" aria-label="Estructura de ejemplo del reporte técnico mensual: resumen, bitácora, dosis aplicada, olores, lodos y grasas, DBO5 y DQO, y ajustes">
+          <div class="bv-report__head"><span>Reporte técnico mensual</span><span>PDF</span></div>
+          <div class="bv-report__row"><span>Resumen</span><i></i></div>
+          <div class="bv-report__row"><span>Bitácora</span><i></i></div>
+          <div class="bv-report__row"><span>Dosis aplicada</span><i class="bv-short"></i></div>
+          <div class="bv-report__row"><span>Olores, lodos, grasas</span><i></i></div>
+          <div class="bv-report__row"><span>DBO<sub>5</sub> / DQO</span><i class="bv-short"></i></div>
+          <div class="bv-report__row"><span>Ajustes</span><i></i></div>
+          <p class="bv-report__foot">Estructura de ejemplo</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
