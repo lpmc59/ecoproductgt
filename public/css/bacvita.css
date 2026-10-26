@@ -455,6 +455,132 @@
 .bv-footer__copy { font-size: 12px; color: rgba(255,255,255,0.7); }
 
 /* ============================================================
+   CASOS REALES / INFORMES PUBLICADOS
+   Página dedicada /casos/ptar-laguneta — reproduce el informe
+   semanal de la plataforma BacVita como caso público.
+   ============================================================ */
+.bv-caso-crumb { background: var(--bv-off); padding: 14px 0; font-size: 13px; color: var(--bv-slate-600); }
+.bv-caso-crumb a { color: var(--bv-teal); font-weight: 600; }
+.bv-caso-crumb__sep { margin: 0 8px; color: var(--bv-slate-500); }
+.bv-caso-crumb__current { color: var(--bv-navy); font-weight: 600; }
+
+.bv-caso { padding: 32px 0 72px; }
+.bv-caso__head { border-top: 4px solid var(--bv-navy); padding-top: 20px; margin-bottom: 24px; }
+.bv-caso__head-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px; gap: 16px; flex-wrap: wrap;
+}
+.bv-caso__brand {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: var(--bv-navy);
+}
+.bv-caso__kind {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em; color: var(--bv-slate-500);
+}
+.bv-caso__title {
+  font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; letter-spacing: -0.015em;
+  color: var(--bv-navy); line-height: 1.1; margin: 6px 0 10px;
+}
+.bv-caso__meta { font-size: 14px; color: var(--bv-slate-600); line-height: 1.5; margin: 0; }
+
+/* Semáforo (variante Vigilar en ámbar — misma lógica que el email) */
+.bv-caso__status {
+  border-left: 4px solid #d97706;
+  background: #fef3e2;
+  padding: 16px 18px;
+  border-radius: 10px;
+  margin: 20px 0 28px;
+}
+.bv-caso__status strong { display: block; color: #92400e; font-size: 15px; margin-bottom: 4px; }
+.bv-caso__status p { margin: 0; color: #78350f; font-size: 14px; line-height: 1.5; }
+.bv-caso__status--ok { border-left-color: var(--bv-teal); background: var(--bv-off-2); }
+.bv-caso__status--ok strong { color: var(--bv-teal-hover); }
+.bv-caso__status--ok p { color: var(--bv-navy); }
+
+/* 3 métricas */
+.bv-caso__stats {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--bv-border);
+  border-radius: var(--bv-radius);
+  background: var(--bv-border);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.bv-caso__stat { background: #fff; padding: 20px 18px; }
+.bv-caso__stat-num {
+  font-size: clamp(22px, 2.6vw, 32px); font-weight: 700; color: var(--bv-navy); line-height: 1.1;
+  margin-bottom: 6px;
+}
+.bv-caso__stat-label {
+  font-size: 13px; color: var(--bv-slate-600); line-height: 1.4;
+}
+.bv-caso__stat-label span { display: block; color: var(--bv-slate-500); }
+
+/* Bloques (DBO5, Última medición, Últimos registros) */
+.bv-caso__block { margin-top: 28px; }
+.bv-caso__block-title {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bv-teal); margin: 0 0 10px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--bv-border);
+}
+.bv-caso__block-note { font-size: 14px; color: var(--bv-slate-600); line-height: 1.6; margin: 0 0 14px; }
+
+/* Tablas */
+.bv-caso__table-wrap { overflow-x: auto; }
+.bv-caso__table {
+  width: 100%; border-collapse: collapse;
+  font-size: 14px; color: var(--bv-navy);
+}
+.bv-caso__table thead th {
+  text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--bv-slate-500);
+  padding: 10px 12px; border-bottom: 1px solid var(--bv-border);
+  white-space: nowrap;
+}
+.bv-caso__table tbody td {
+  padding: 12px; border-bottom: 1px solid var(--bv-slate-100);
+  vertical-align: middle;
+}
+.bv-caso__table tbody tr:last-child td { border-bottom: 0; }
+.bv-caso__table .num { text-align: right; white-space: nowrap; }
+.bv-caso__table .num strong { font-weight: 700; }
+
+/* Pills de estado (Cumple / Vigilar) — mismo cromático del email */
+.bv-pill {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  font-size: 12px; font-weight: 700; line-height: 1.4; white-space: nowrap;
+}
+.bv-pill--ok   { background: #dcfce7; color: #166534; }
+.bv-pill--warn { background: #fef3e2; color: #92400e; }
+
+/* Pie del informe */
+.bv-caso__foot {
+  margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--bv-border);
+  text-align: center;
+}
+.bv-caso__foot p {
+  font-size: 13px; color: var(--bv-slate-600); line-height: 1.65;
+  max-width: 640px; margin: 0 auto 20px;
+}
+
+/* Enlace al caso desde la sección Resultados de la landing */
+.bv-results__caso-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px;
+  font-size: 14px; font-weight: 600; color: var(--bv-teal);
+  padding: 10px 16px; border: 1px solid var(--bv-teal);
+  border-radius: var(--bv-radius);
+  transition: background var(--bv-transition), color var(--bv-transition);
+}
+.bv-results__caso-link:hover { background: var(--bv-teal); color: #fff; }
+.bv-results__caso-link svg { width: 14px; height: 14px; }
+
+@media (max-width: 700px) {
+  .bv-caso__stats { grid-template-columns: 1fr; gap: 1px; }
+  .bv-caso__head-top { align-items: flex-start; }
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1024px) {

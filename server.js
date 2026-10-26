@@ -395,6 +395,12 @@ app.get('/bacvita', (req, res) => {
   res.render('bacvita');
 });
 
+// Caso real publicado: informe semanal de PTAR Laguneta (Santa Catarina Pinula).
+// Contenido autorizado explícitamente por el cliente.
+app.get('/casos/ptar-laguneta', (req, res) => {
+  res.render('caso-ptar-laguneta');
+});
+
 app.get('/categoria/:id', (req, res) => {
   const db = loadDB();
   const cat = db.categories.find(c => c.id === req.params.id);
