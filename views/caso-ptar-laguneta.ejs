@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caso real: PTAR Laguneta · Informe semanal · BacVita</title>
+  <meta name="description" content="Informe semanal de la PTAR Laguneta (Municipal, Santa Catarina Pinula, Guatemala) operada con BacVita. Período 10–17 de octubre de 2026.">
+  <link rel="canonical" href="https://ecoproductgt.com/casos/ptar-laguneta">
+
+  <meta property="og:title" content="Caso real: PTAR Laguneta · BacVita">
+  <meta property="og:description" content="Informe semanal publicado de una PTAR municipal operada con BacVita.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ecoproductgt.com/casos/ptar-laguneta">
+  <meta property="og:image" content="https://ecoproductgt.com/assets/bacvita/bacvita-bottle-front.jpg">
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bacvita.css?v=2026102601">
+</head>
+<body class="bv-page">
+
+  <%- include('partials/bacvita/header') %>
+
+  <main id="main" class="bv-caso-page">
+
+    <!-- Breadcrumb + regreso a BacVita -->
+    <nav class="bv-caso-crumb" aria-label="Ruta de navegación">
+      <div class="bv-container">
+        <a href="/bacvita">← Volver a BacVita</a>
+        <span class="bv-caso-crumb__sep">·</span>
+        <span>Casos reales</span>
+        <span class="bv-caso-crumb__sep">·</span>
+        <span class="bv-caso-crumb__current">PTAR Laguneta</span>
+      </div>
+    </nav>
+
+    <article class="bv-caso">
+      <div class="bv-container">
+
+        <!-- Encabezado del informe -->
+        <header class="bv-caso__head">
+          <div class="bv-caso__head-top">
+            <span class="bv-caso__brand">BACVITA</span>
+            <span class="bv-caso__kind">INFORME SEMANAL</span>
+          </div>
+          <h1 class="bv-caso__title">PTAR Laguneta</h1>
+          <p class="bv-caso__meta">Municipal · Santa Catarina Pinula, Guatemala</p>
+          <p class="bv-caso__meta">Período: 10 de octubre al 17 de octubre de 2026</p>
+        </header>
+
+        <!-- Semáforo de cumplimiento -->
+        <aside class="bv-caso__status bv-caso__status--vigilar" role="status" aria-label="Estado de cumplimiento">
+          <strong>Cumple, con parámetros a vigilar</strong>
+          <p>Cerca del límite: pH, Oxígeno disuelto, Temperatura.</p>
+        </aside>
+
+        <!-- 3 métricas resumen -->
+        <section class="bv-caso__stats" aria-label="Resumen de la semana">
+          <div class="bv-caso__stat">
+            <div class="bv-caso__stat-num">0</div>
+            <div class="bv-caso__stat-label">pruebas esta semana<br><span>20 en total</span></div>
+          </div>
+          <div class="bv-caso__stat">
+            <div class="bv-caso__stat-num">0 L</div>
+            <div class="bv-caso__stat-label">BacVita aplicado<br><span>esta semana</span></div>
+          </div>
+          <div class="bv-caso__stat">
+            <div class="bv-caso__stat-num">65.7 L</div>
+            <div class="bv-caso__stat-label">acumulado del<br><span>tratamiento</span></div>
+          </div>
+        </section>
+
+        <!-- Cumplimiento DBO5 -->
+        <section class="bv-caso__block" aria-labelledby="bv-caso-dbo-title">
+          <h2 class="bv-caso__block-title" id="bv-caso-dbo-title">Cumplimiento de DBO<sub>5</sub></h2>
+          <p class="bv-caso__block-note">
+            El parámetro de referencia principal del período se mantuvo
+            dentro del límite normativo durante el seguimiento.
+          </p>
+        </section>
+
+        <!-- Última medición -->
+        <section class="bv-caso__block" aria-labelledby="bv-caso-last-title">
+          <h2 class="bv-caso__block-title" id="bv-caso-last-title">Última medición · 17-sept</h2>
+          <p class="bv-caso__block-note">
+            No se registraron pruebas esta semana. Se muestran los datos
+            de la última medición disponible (17-sept).
+          </p>
+
+          <div class="bv-caso__table-wrap">
+            <table class="bv-caso__table" aria-label="Parámetros medidos y estado">
+              <thead>
+                <tr>
+                  <th scope="col">Parámetro</th>
+                  <th scope="col" class="num">Resultado</th>
+                  <th scope="col">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DBO<sub>5</sub></td>
+                  <td class="num"><strong>150</strong> mg/L</td>
+                  <td><span class="bv-pill bv-pill--ok">Cumple</span></td>
+                </tr>
+                <tr>
+                  <td>DQO</td>
+                  <td class="num"><strong>350</strong> mg/L</td>
+                  <td><span class="bv-pill bv-pill--ok">Cumple</span></td>
+                </tr>
+                <tr>
+                  <td>SST</td>
+                  <td class="num"><strong>50</strong> mg/L</td>
+                  <td><span class="bv-pill bv-pill--ok">Cumple</span></td>
+                </tr>
+                <tr>
+                  <td>pH</td>
+                  <td class="num"><strong>6</strong></td>
+                  <td><span class="bv-pill bv-pill--warn">Vigilar</span></td>
+                </tr>
+                <tr>
+                  <td>Oxígeno disuelto</td>
+                  <td class="num"><strong>6</strong> mg/L</td>
+                  <td><span class="bv-pill bv-pill--warn">Vigilar</span></td>
+                </tr>
+                <tr>
+                  <td>Temperatura</td>
+                  <td class="num"><strong>18</strong> °C</td>
+                  <td><span class="bv-pill bv-pill--warn">Vigilar</span></td>
+                </tr>
+                <tr>
+                  <td>Grasas y aceites</td>
+                  <td class="num"><strong>9</strong> mg/L</td>
+                  <td><span class="bv-pill bv-pill--ok">Cumple</span></td>
+                </tr>
+                <tr>
+                  <td>Nitrógeno total</td>
+                  <td class="num"><strong>15</strong> mg/L</td>
+                  <td><span class="bv-pill bv-pill--ok">Cumple</span></td>
+                </tr>
+                <tr>
+                  <td>Fósforo total</td>
+                  <td class="num"><strong>9</strong> mg/L</td>
+                  <td><span class="bv-pill bv-pill--ok">Cumple</span></td>
+                </tr>
+                <tr>
+                  <td>Coliformes fecales</td>
+                  <td class="num"><strong>2,000</strong> NMP/100 mL</td>
+                  <td><span class="bv-pill bv-pill--ok">Cumple</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Últimos registros -->
+        <section class="bv-caso__block" aria-labelledby="bv-caso-regs-title">
+          <h2 class="bv-caso__block-title" id="bv-caso-regs-title">Últimos registros</h2>
+          <div class="bv-caso__table-wrap">
+            <table class="bv-caso__table" aria-label="Últimos registros de aplicación">
+              <thead>
+                <tr>
+                  <th scope="col">Fecha · Responsable</th>
+                  <th scope="col" class="num">DBO<sub>5</sub></th>
+                  <th scope="col" class="num">Dosis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>17-sept · Paula Rebeca Barillas</td>
+                  <td class="num">150 mg/L</td>
+                  <td class="num"><strong>1.1 L</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Pie del informe -->
+        <footer class="bv-caso__foot">
+          <p>
+            Informe generado por la plataforma BacVita y publicado con autorización
+            del cliente. El seguimiento técnico continúa; se agendará nueva toma de
+            muestras para actualizar los parámetros del período en curso.
+          </p>
+          <a class="bv-btn bv-btn--primary" href="/bacvita#contacto">
+            Solicita un diagnóstico para tu PTAR
+          </a>
+        </footer>
+
+      </div>
+    </article>
+  </main>
+
+  <%- include('partials/bacvita/footer') %>
+
+  <script>
+    document.querySelectorAll('#bv-nav a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(){
+        var n = document.getElementById('bv-nav');
+        var btn = document.querySelector('.bv-nav-toggle');
+        if (n && n.classList.contains('bv-nav--open')) {
+          n.classList.remove('bv-nav--open');
+          if (btn) { btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Abrir menú'); }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
